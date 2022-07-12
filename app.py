@@ -1,52 +1,61 @@
-import pandas as pd
-import numpy as np
 from docxtpl import DocxTemplate
 import openpyxl
 
 doc = DocxTemplate('probe2.docx')
 
-# import database from exel
-# data = pd.read_excel('word_automation.xlsm',
-#                      skiprows=0,
-#                      skipfooter=12,
-#                      usecols='A',
-#                     )
-
 # читаем файл
 file_for_work = openpyxl.load_workbook('word_automation.xlsm')
-
+# лист exel страницы(активный)
 sheet = file_for_work.active
 
-lst = []
-for row in sheet.rows:
-    lst.append(str(row[0].value))
 
-del lst[0]
-del lst[-12:]
+def converting_exel_files_to_list():
+    """Перевод значений эксель в список"""
+    for row in sheet.rows:
+        lst.append(str(row[0].value))
 
-dict_of_lst_og = {}
-for index, value in enumerate(lst):
-    dict_of_lst_og[index] = value
+
+def converting_data_lst_to_dict_data():
+    """преобразует список в словрь"""
     # dict = {index: value for index, value in enumerate(lst} ---> то же самое
-#
-print(dict_of_lst_og)
-sog = int(input("Выберите Старшего(нажмите соотвествующую цифру): "))
+    for index, value in enumerate(lst):
+        dict_of_lst_og[index] = value
 
+
+def pretty_print_to_dict():
+    """Выводит словарь ключ-значение-построчно"""
+    for key, value in dict_of_lst_og.items():
+        print(f'{key}: {value}')
 
 
 def change_sog_of_record():
     """Позволяет менять л/с в записи"""
-    counter = 0
-    while True:
-        if sog == counter:
-            context = {
-                'sog': dict_of_lst_og[counter]
-            }
-            doc.render(context)
-            doc.save('probe2.docx')
-            break
-        else:
-            counter += 1
+    try:
+        counter = 0
+        while True:
+            if sog == counter:
+                context = {
+                    'sog': dict_of_lst_og[counter]
+                }
+                doc.render(context)
+                doc.save('probe2.docx')
+                break
+            else:
+                counter += 1
+    except KeyError:
+        print("Введите значение в указанном диапазоне")
 
 
+lst = []
+converting_exel_files_to_list()
+del lst[0]
+del lst[-12:]
+
+dict_of_lst_og = {}
+converting_data_lst_to_dict_data()
+
+pretty_print_to_dict()
+
+print('+' + '-------' * 10 + '+')
+sog = int(input("Выберите Старшего(нажмите соотвествующую цифру): "))
 change_sog_of_record()
