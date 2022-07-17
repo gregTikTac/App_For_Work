@@ -48,14 +48,18 @@ def list_SOG_for_template(number_of_sog):
             break
 
 
-
-def list_OG_for_template():
-    for num, values in enumerate(list_of_og):
-        if og != num:
-            continue
-        else:
-            list_SOG_and_OG.append(values)
-
+def list_OG_for_template(number_of_og):
+    counter = 0
+    while True:
+        try:
+            if counter == number_of_og:
+                list_SOG_and_OG.append(list_of_og[counter])
+                break
+            else:
+                counter += 1
+        except IndexError:
+            print("Введите правильное значение")
+            break
 
 converting_exel_files_to_list_for_sog()
 del list_of_sog[0]
@@ -63,21 +67,28 @@ del list_of_sog[-12:]
 print_numb_and_values_list_SOG()
 print('+' + '---------------' * 10 + '+')
 list_SOG_for_template(int(input('Введите номер СОГ: ')))
-if len(list_SOG_and_OG) == 0:
+while len(list_SOG_and_OG) != 1:
     list_SOG_for_template(int(input('Попробуйте еще раз!')))
-    print(list_SOG_and_OG)
-else:
-    print(list_SOG_and_OG)
+    if len(list_SOG_and_OG) > 0:
+        print(list_SOG_and_OG)
+        break
+    else:
+        print(list_SOG_and_OG)
 
 
 
 
 
-# converting_exel_files_to_list_for_og()
-# del list_of_og[0:]
-# print_numb_and_values_list_OG()
-# print('+' + '---------------' * 10 + '+')
-# og = int(input('Введите номер ОГ: '))
-# list_OG_for_template()
-# print('Запись добавлена')
-# print(list_SOG_and_OG)
+converting_exel_files_to_list_for_og()
+del list_of_og[0:]
+print_numb_and_values_list_OG()
+print('+' + '---------------' * 10 + '+')
+list_OG_for_template(int(input('Введите номер ОГ: ')))
+while len(list_SOG_and_OG) != 1:
+    list_OG_for_template(int(input('Попробуйте еще раз!')))
+    if len(list_SOG_and_OG) > 0:
+        print(list_SOG_and_OG)
+        break
+    else:
+        print(list_SOG_and_OG)
+
