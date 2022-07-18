@@ -14,6 +14,7 @@ list_of_sog = []
 
 
 def converting_exel_files_to_list_for_sog():
+    """Конвертирует данные из 1 столбца таблицы exel в список"""
     for row in sheet.rows:
         list_of_sog.append(str(row[0].value))
 
@@ -25,16 +26,22 @@ def converting_exel_files_to_list_for_og():
 
 
 def print_numb_and_values_list_SOG():
+    """Вывод списка [номер : значение]"""
+    print("Список СОГ:")
     for numb, values in enumerate(list_of_sog):
         print(f'{numb} {values}')
-
+    print('+' + '---------------' * 10 + '+')
 
 def print_numb_and_values_list_OG():
+    """Вывод списка [номер : значение]"""
+    print("Список ОГ:")
     for numb, values in enumerate(list_of_og):
         print(f'{numb} {values}')
+    print('+' + '---------------' * 10 + '+')
 
 
 def list_SOG_for_template(number_of_sog):
+    """Добавление данных выбранных данных СОГ в список для рендеренга страницы"""
     counter = 0
     while True:
         try:
@@ -45,60 +52,73 @@ def list_SOG_for_template(number_of_sog):
             elif counter == number_of_sog:
                 list_SOG_and_OG.append(list_of_sog[counter])
                 print('Запись добавлена!')
+                print('+' + '---------------' * 10 + '+')
                 break
             else:
                 counter += 1
-        except IndexError:
+        except (IndexError, ValueError):
             print("Вы ввели не правильное значение!")
             break
-        except ValueError:
-            print("Вы ввели не правильное значение!")
-            break
+
 
 
 def list_OG_for_template(number_of_og):
+    """Добавление данных выбранных данных ОГ в список для рендеренга страницы"""
     counter = 0
     while True:
         try:
-            if counter == number_of_og:
+            number_of_og = int(number_of_og)
+            if number_of_og < 0:
+                print("Вы ввели не правильное значение")
+                break
+            elif counter == number_of_og:
                 list_SOG_and_OG.append(list_of_og[counter])
+                print('Запись добавлена!')
+                print('+' + '---------------' * 10 + '+')
                 break
             else:
                 counter += 1
-        except IndexError:
-            print("Введите правильное значение")
+        except (IndexError, ValueError):
+            print("Вы ввели не правильное значение!")
             break
+
+
+def choose_person_from_SOG():
+    list_SOG_for_template(input('Введите номер СОГ: '))
+    if len(list_SOG_and_OG) > 0:
+        print(list_SOG_and_OG)
+    else:
+        while len(list_SOG_and_OG) < 1:
+            list_SOG_for_template(input("Введите корректное значение: "))
+            if len(list_SOG_and_OG) >= 1:
+                print(list_SOG_and_OG)
+
+
+def choose_person_from_OG():
+    list_OG_for_template(int(input('Введите номер ОГ: ')))
+    if len(list_SOG_and_OG) > 0:
+        print(list_SOG_and_OG)
+    else:
+        while len(list_SOG_and_OG) < 1:
+            list_OG_for_template(input("Введите корректное значение: "))
+            if len(list_SOG_and_OG) >= 1:
+                print(list_SOG_and_OG)
 
 
 converting_exel_files_to_list_for_sog()
 del list_of_sog[0]
 del list_of_sog[-12:]
 print_numb_and_values_list_SOG()
+choose_person_from_SOG()
+
+converting_exel_files_to_list_for_og()
+del list_of_og[0]
+print_numb_and_values_list_OG()
+choose_person_from_OG()
+
+
 print('+' + '---------------' * 10 + '+')
-list_SOG_for_template(input('Введите номер СОГ: '))
-if len(list_SOG_and_OG) > 0:
-    print(list_SOG_and_OG)
-else:
-    while len(list_SOG_and_OG) < 1:
-        list_SOG_for_template(input("Введите корректное значение: "))
-        if len(list_SOG_and_OG) >= 1:
-            print(list_SOG_and_OG)
+print('Выберите ОГ поного состава')
+print('+' + '---------------' * 10 + '+')
+print()
 
-
-
-
-
-
-# converting_exel_files_to_list_for_og()
-# del list_of_og[0:]
-# print_numb_and_values_list_OG()
-# print('+' + '---------------' * 10 + '+')
-# list_OG_for_template(int(input('Введите номер ОГ: ')))
-# while len(list_SOG_and_OG) != 1:
-#     list_OG_for_template(int(input('Попробуйте еще раз!')))
-#     if len(list_SOG_and_OG) > 0:
-#         print(list_SOG_and_OG)
-#         break
-#     else:
-#         print(list_SOG_and_OG)
-#
