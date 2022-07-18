@@ -87,22 +87,27 @@ def choose_person_from_SOG():
     list_SOG_for_template(input('Введите номер СОГ: '))
     if len(list_SOG_and_OG) > 0:
         print(list_SOG_and_OG)
+        print('+' + '---------------' * 10 + '+')
+
     else:
         while len(list_SOG_and_OG) < 1:
             list_SOG_for_template(input("Введите корректное значение: "))
             if len(list_SOG_and_OG) >= 1:
                 print(list_SOG_and_OG)
+                print('+' + '---------------' * 10 + '+')
 
 
 def choose_person_from_OG():
     list_OG_for_template(int(input('Введите номер ОГ: ')))
     if len(list_SOG_and_OG) > 0:
         print(list_SOG_and_OG)
+        print('+' + '---------------' * 10 + '+')
     else:
         while len(list_SOG_and_OG) < 1:
             list_OG_for_template(input("Введите корректное значение: "))
             if len(list_SOG_and_OG) >= 1:
                 print(list_SOG_and_OG)
+                print('+' + '---------------' * 10 + '+')
 
 
 converting_exel_files_to_list_for_sog()
@@ -122,3 +127,9 @@ print('Выберите ОГ поного состава')
 print('+' + '---------------' * 10 + '+')
 print()
 
+choose_person_from_SOG()
+choose_person_from_OG()
+choose_person_from_OG()
+choose_person_from_OG()
+choose_person_from_OG()
+choose_person_from_OG()
