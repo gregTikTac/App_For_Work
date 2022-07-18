@@ -38,13 +38,20 @@ def list_SOG_for_template(number_of_sog):
     counter = 0
     while True:
         try:
-            if counter == number_of_sog:
+            if number_of_sog < 0:
+                print("Вы ввели не правильное значение")
+                break
+            elif counter == number_of_sog:
                 list_SOG_and_OG.append(list_of_sog[counter])
+                print('Запись добавлена!')
                 break
             else:
                 counter += 1
         except IndexError:
-            print("Введите правильное значение")
+            print("Вы ввели не правильное значение!")
+            break
+        except ValueError:
+            print("Вы ввели не правильное значение!")
             break
 
 
@@ -61,34 +68,36 @@ def list_OG_for_template(number_of_og):
             print("Введите правильное значение")
             break
 
+
 converting_exel_files_to_list_for_sog()
 del list_of_sog[0]
 del list_of_sog[-12:]
 print_numb_and_values_list_SOG()
 print('+' + '---------------' * 10 + '+')
 list_SOG_for_template(int(input('Введите номер СОГ: ')))
-while len(list_SOG_and_OG) != 1:
-    list_SOG_for_template(int(input('Попробуйте еще раз!')))
-    if len(list_SOG_and_OG) > 0:
-        print(list_SOG_and_OG)
-        break
-    else:
-        print(list_SOG_and_OG)
+if len(list_SOG_and_OG) > 0:
+    print(list_SOG_and_OG)
+else:
+    while len(list_SOG_and_OG) < 1:
+        list_SOG_for_template(int(input("Введите корректное значение: ")))
+        if len(list_SOG_and_OG) >= 1:
+            print(list_SOG_and_OG)
 
 
 
 
 
-converting_exel_files_to_list_for_og()
-del list_of_og[0:]
-print_numb_and_values_list_OG()
-print('+' + '---------------' * 10 + '+')
-list_OG_for_template(int(input('Введите номер ОГ: ')))
-while len(list_SOG_and_OG) != 1:
-    list_OG_for_template(int(input('Попробуйте еще раз!')))
-    if len(list_SOG_and_OG) > 0:
-        print(list_SOG_and_OG)
-        break
-    else:
-        print(list_SOG_and_OG)
 
+# converting_exel_files_to_list_for_og()
+# del list_of_og[0:]
+# print_numb_and_values_list_OG()
+# print('+' + '---------------' * 10 + '+')
+# list_OG_for_template(int(input('Введите номер ОГ: ')))
+# while len(list_SOG_and_OG) != 1:
+#     list_OG_for_template(int(input('Попробуйте еще раз!')))
+#     if len(list_SOG_and_OG) > 0:
+#         print(list_SOG_and_OG)
+#         break
+#     else:
+#         print(list_SOG_and_OG)
+#
