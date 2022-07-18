@@ -38,6 +38,7 @@ def list_SOG_for_template(number_of_sog):
     counter = 0
     while True:
         try:
+            number_of_sog = int(number_of_sog)
             if number_of_sog < 0:
                 print("Вы ввели не правильное значение")
                 break
@@ -74,12 +75,12 @@ del list_of_sog[0]
 del list_of_sog[-12:]
 print_numb_and_values_list_SOG()
 print('+' + '---------------' * 10 + '+')
-list_SOG_for_template(int(input('Введите номер СОГ: ')))
+list_SOG_for_template(input('Введите номер СОГ: '))
 if len(list_SOG_and_OG) > 0:
     print(list_SOG_and_OG)
 else:
     while len(list_SOG_and_OG) < 1:
-        list_SOG_for_template(int(input("Введите корректное значение: ")))
+        list_SOG_for_template(input("Введите корректное значение: "))
         if len(list_SOG_and_OG) >= 1:
             print(list_SOG_and_OG)
 
