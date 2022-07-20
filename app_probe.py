@@ -1,7 +1,7 @@
 from docxtpl import DocxTemplate
 import openpyxl
 
-doc = DocxTemplate('probe2.docx')
+doc = DocxTemplate('probe3.docx')
 
 # читаем файл
 file_for_work = openpyxl.load_workbook('word_automation.xlsm')
@@ -174,6 +174,27 @@ def list_PM_for_template(number_of_PM):
             print("Вы ввели не правильное значение!")
             break
 
+def list_AK_for_template(number_of_AK):
+    """Добавление данных выбранных данных ОГ в список для рендеренга страницы"""
+    counter = 0
+    while True:
+        try:
+            number_of_AK = int(number_of_AK)
+            if number_of_AK < 0:
+                print("Вы ввели не правильное значение")
+                break
+            elif counter == number_of_AK:
+                list_of_AK_for_PAT_for_template.append(list_AK[counter])
+                print('Запись добавлена!')
+                print('+' + '---------------' * 10 + '+')
+                break
+            else:
+                counter += 1
+        except (IndexError, ValueError):
+            print("Вы ввели не правильное значение!")
+            break
+
+
 
 def choose_person_from_SOG():
     list_SOG_for_template(input('Введите номер СОГ: '))
@@ -227,51 +248,92 @@ def choose_PM_from_OG():
                 print(list_of_PM_for_OG_for_template)
                 print('+' + '---------------' * 10 + '+')
 
-# # ВЫБОР ОГ СОКРАЩЕННОГО СОСТАВА
-# converting_exel_files_to_list_for_sog()
-# del list_of_sog[0]
-# del list_of_sog[-17:]
-# print_numb_and_values_list_SOG()
-# choose_person_from_SOG()
-#
-# converting_exel_files_to_list_for_og()
-# del list_of_og[0]
-# del list_of_og[-5:]
-# print_numb_and_values_list_OG()
-# choose_person_from_OG()
+def choose_AK_from_PAT():
+    list_AK_for_template(int(input('Введите номер AK для ОГ: ')))
+    if len(list_of_AK_for_PAT_for_template) > 0:
+        print(list_of_AK_for_PAT_for_template)
+        print('+' + '---------------' * 10 + '+')
+    else:
+        while len(list_of_AK_for_PAT_for_template) < 1:
+            list_PAT_for_template(input("Введите корректное значение: "))
+            if len(list_of_AK_for_PAT_for_template) >= 1:
+                print(list_of_AK_for_PAT_for_template)
+                print('+' + '---------------' * 10 + '+')
+
+def render_template():
+    # dict = {index: value for index, value in enumerate(lst}
+    content_OG = {index: value for index, value in enumerate(list_SOG_and_OG_for_template)}
+    content_PAT = {index: value for index, value in enumerate(list_for_PAT_for_template)}
+    content_PM = {index: value for index, value in enumerate(list_of_PM_for_OG_for_template)}
+    content_AK = {index: value for index, value in enumerate(list_of_AK_for_PAT_for_template)}
+    doc.render(content_OG, content_PAT)
+    doc.render( content_PM, content_AK)
+    doc.save('probe3.docx')
+
+
+
+# ВЫБОР ОГ СОКРАЩЕННОГО СОСТАВА
+converting_exel_files_to_list_for_sog()
+del list_of_sog[0]
+del list_of_sog[-32:]
+print_numb_and_values_list_SOG()
+choose_person_from_SOG()
+
+converting_exel_files_to_list_for_og()
+del list_of_og[0]
+del list_of_og[-20:]
+print_numb_and_values_list_OG()
+choose_person_from_OG()
 #
 # # ВЫБОР ОГ ПОЛНОГО СОСТАВА
-# print('+' + '---------------' * 10 + '+')
-# print('Выберите ОГ полного состава')
-# print('+' + '---------------' * 10 + '+')
-# print()
-# choose_person_from_SOG()
-# for chose in range(0, 5):
-#     choose_person_from_OG()
-#
-# print()
-# print('+' + '---------------' * 10 + '+')
-# print("Выберете ПАТ")
-# print('+' + '---------------' * 10 + '+')
+print('+' + '---------------' * 10 + '+')
+print('Выберите ОГ полного состава')
+print('+' + '---------------' * 10 + '+')
+print()
+choose_person_from_SOG()
+for chose in range(0, 5):
+    choose_person_from_OG()
+
+print()
+print('+' + '---------------' * 10 + '+')
+print("Выберете ПАТ")
+print('+' + '---------------' * 10 + '+')
 #
 # # ВЫБОР Л/С ДЛЯ ПАТ
-# converting_exel_files_to_list_for_PAT()
-# del list_of_pat[0]
-# print_numb_and_values_list_PAT()
-# choose_person_from_PAT()
-# for choose in range(0, 24):
-#     choose_person_from_PAT()
-
-
+converting_exel_files_to_list_for_PAT()
+del list_of_pat[0]
+del list_of_pat[-15:]
+print_numb_and_values_list_PAT()
+choose_person_from_PAT()
+for choose in range(0, 24):
+    choose_person_from_PAT()
+#
+#
 print()
 print('+' + '---------------' * 10 + '+')
 print("Выберете ПМ для ОГ")
 print('+' + '---------------' * 10 + '+')
 
-
-# ВЫбор ПМ для ОГ
+#
+# # ВЫбор ПМ для ОГ
 converting_exel_files_to_list_PM_for_PAT()
 del list_PM[0]
 del list_PM[-2:]
 print_numb_and_values_list_PM_PAT()
-choose_PM_from_OG()
+for choose in range(0, 8):
+    choose_PM_from_OG()
+
+
+print()
+print('+' + '---------------' * 10 + '+')
+print("Выберете AK для ПАТ")
+print('+' + '---------------' * 10 + '+')
+
+converting_exel_files_to_list_AK_for_PAT()
+del list_AK[-8:]
+print_numb_and_values_list_AK_PAT()
+for choose in range(0, 27):
+    choose_AK_from_PAT()
+
+
+render_template()
