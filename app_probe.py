@@ -260,15 +260,35 @@ def choose_AK_from_PAT():
                 print(list_of_AK_for_PAT_for_template)
                 print('+' + '---------------' * 10 + '+')
 
+
 def render_template():
-    # dict = {index: value for index, value in enumerate(lst}
-    content_OG = {index: value for index, value in enumerate(list_SOG_and_OG_for_template)}
-    content_PAT = {index: value for index, value in enumerate(list_for_PAT_for_template)}
-    content_PM = {index: value for index, value in enumerate(list_of_PM_for_OG_for_template)}
-    content_AK = {index: value for index, value in enumerate(list_of_AK_for_PAT_for_template)}
-    doc.render(content_OG, content_PAT)
-    doc.render( content_PM, content_AK)
+# dict = {index: value for index, value in enumerate(lst}
+    context = {
+            'og0': list_SOG_and_OG_for_template[0],
+            'og1': list_SOG_and_OG_for_template[1],
+            'og2': list_SOG_and_OG_for_template[2],
+            'og3': list_SOG_and_OG_for_template[3],
+            'og4': list_SOG_and_OG_for_template[4],
+            'og5': list_SOG_and_OG_for_template[5],
+            'og6': list_SOG_and_OG_for_template[6],
+            'og7': list_SOG_and_OG_for_template[7],
+            'og8': list_SOG_and_OG_for_template[8],
+        }
+
+    doc.render(context)
     doc.save('probe3.docx')
+
+
+
+
+    # content_PAT = {str(index): value for index, value in enumerate(list_for_PAT_for_template)}
+    # content_PM = {str(index): value for index, value in enumerate(list_of_PM_for_OG_for_template)}
+    # content_AK = {str(index): value for index, value in enumerate(list_of_AK_for_PAT_for_template)}
+
+    # doc.render(content_PAT)
+    # doc.render(content_PM)
+    # doc.render(content_AK)
+
 
 
 
@@ -284,6 +304,7 @@ del list_of_og[0]
 del list_of_og[-20:]
 print_numb_and_values_list_OG()
 choose_person_from_OG()
+
 #
 # # ВЫБОР ОГ ПОЛНОГО СОСТАВА
 print('+' + '---------------' * 10 + '+')
@@ -291,49 +312,50 @@ print('Выберите ОГ полного состава')
 print('+' + '---------------' * 10 + '+')
 print()
 choose_person_from_SOG()
-for chose in range(0, 5):
+for chose in range(0, 6):
     choose_person_from_OG()
-
-print()
-print('+' + '---------------' * 10 + '+')
-print("Выберете ПАТ")
-print('+' + '---------------' * 10 + '+')
+print(list_SOG_and_OG_for_template)
 #
-# # ВЫБОР Л/С ДЛЯ ПАТ
-converting_exel_files_to_list_for_PAT()
-del list_of_pat[0]
-del list_of_pat[-15:]
-print_numb_and_values_list_PAT()
-choose_person_from_PAT()
-for choose in range(0, 24):
-    choose_person_from_PAT()
+# print()
+# print('+' + '---------------' * 10 + '+')
+# print("Выберете ПАТ")
+# print('+' + '---------------' * 10 + '+')
+# #
+# # # ВЫБОР Л/С ДЛЯ ПАТ
+# converting_exel_files_to_list_for_PAT()
+# del list_of_pat[0]
+# del list_of_pat[-15:]
+# print_numb_and_values_list_PAT()
+# choose_person_from_PAT()
+# for choose in range(0, 24):
+#     choose_person_from_PAT()
+# #
+# #
+# print()
+# print('+' + '---------------' * 10 + '+')
+# print("Выберете ПМ для ОГ")
+# print('+' + '---------------' * 10 + '+')
+#
+# #
+# # # ВЫбор ПМ для ОГ
+# converting_exel_files_to_list_PM_for_PAT()
+# del list_PM[0]
+# del list_PM[-2:]
+# print_numb_and_values_list_PM_PAT()
+# for choose in range(0, 8):
+#     choose_PM_from_OG()
 #
 #
-print()
-print('+' + '---------------' * 10 + '+')
-print("Выберете ПМ для ОГ")
-print('+' + '---------------' * 10 + '+')
-
+# print()
+# print('+' + '---------------' * 10 + '+')
+# print("Выберете AK для ПАТ")
+# print('+' + '---------------' * 10 + '+')
 #
-# # ВЫбор ПМ для ОГ
-converting_exel_files_to_list_PM_for_PAT()
-del list_PM[0]
-del list_PM[-2:]
-print_numb_and_values_list_PM_PAT()
-for choose in range(0, 8):
-    choose_PM_from_OG()
-
-
-print()
-print('+' + '---------------' * 10 + '+')
-print("Выберете AK для ПАТ")
-print('+' + '---------------' * 10 + '+')
-
-converting_exel_files_to_list_AK_for_PAT()
-del list_AK[-8:]
-print_numb_and_values_list_AK_PAT()
-for choose in range(0, 27):
-    choose_AK_from_PAT()
+# converting_exel_files_to_list_AK_for_PAT()
+# del list_AK[-8:]
+# print_numb_and_values_list_AK_PAT()
+# for choose in range(0, 27):
+#     choose_AK_from_PAT()
 
 
 render_template()
