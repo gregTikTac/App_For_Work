@@ -35,7 +35,6 @@ def converting_og_list_data_to_og_dict_data():
         dict_of_og[index] = value
 
 
-
 def pretty_print_to_dict_sog():
     """Выводит словарь ключ-значение-построчно"""
     for key, value in dict_of_sog.items():
@@ -48,6 +47,9 @@ def pretty_print_to_dict_og():
         print(f'{key}: {value}')
 
 
+context = {}
+
+
 def change_sog_of_record():
     """Позволяет менять л/с сог в записи"""
     try:
@@ -57,8 +59,7 @@ def change_sog_of_record():
                 context = {
                     'sog': dict_of_sog[counter]
                 }
-                doc.render(context)
-                doc.save('probe2.docx')
+
                 break
             else:
                 counter += 1
@@ -75,15 +76,12 @@ def change_og_of_record():
                 context = {
                     'og_upravlenia': dict_of_og[counter]
                 }
-                doc.render(context)
-                doc.save('probe2.docx')
                 break
             else:
                 counter += 1
     except KeyError:
         print("Введите значение в указанном диапазоне")
 
-list_of_template_og = []
 
 # # добавление старшего ог
 list_of_sog = []
@@ -93,21 +91,21 @@ del list_of_sog[-12:]
 
 dict_of_sog = {}
 converting_sog_list_data_to_sog_dict_data()
+
 pretty_print_to_dict_sog()
+
 print('+' + '-------' * 10 + '+')
 sog = int(input("Выберите Старшего(нажмите соотвествующую цифру): "))
 change_sog_of_record()
 
-
 # добавление ог управления
 list_of_og = []
 converting_exel_files_to_list_for_og()
+
 dict_of_og = {}
 converting_og_list_data_to_og_dict_data()
+
 pretty_print_to_dict_og()
+
 print('+' + '-------' * 10 + '+')
 og_upravlenie = int(input("Выберите off управления(нажмите соотвествующую цифру): "))
-
-
-# Изменение ОГ полного состава
-
