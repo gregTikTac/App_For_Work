@@ -305,7 +305,11 @@ def choose_date_of_31_days():
     global date
     global date2
     while True:
-        date = int(input("Введите число от 1 до 31: "))
+        try:
+            date = int(input("Введите число от 1 до 31: "))
+        except ValueError:
+            print("Введите коректное значение..")
+            continue
         if 31 < date or date < 1:
             print("Попробуйте еще раз!")
             continue
@@ -324,7 +328,11 @@ def choose_date_of_30_days():
     global date
     global date2
     while True:
-        date = int(input("Введите число от 1 до 30: "))
+        try:
+            date = int(input("Введите число от 1 до 30: "))
+        except ValueError:
+            print("Введите коректное значение..")
+            continue
         if 30 < date or date < 1:
             print("Попробуйте еще раз!")
             continue
@@ -343,7 +351,11 @@ def choose_date_of_febury_days():
     global date
     global date2
     while True:
-        date = int(input("Введите число от 1 до 28: "))
+        try:
+            date = int(input("Введите число от 1 до 28: "))
+        except ValueError:
+            print("Введите коректное значение..")
+            continue
         if 28 < date or date < 1:
             print("Попробуйте еще раз!")
             continue
@@ -361,7 +373,12 @@ def choose_date_of_febury_days():
 def choose_month_and_day():
     global month
     while True:
-        month = int(input("Введите номер месяца: "))
+        try:
+            month = int(input("Введите номер месяца: "))
+        except ValueError:
+            print("Введите коректоное значение..")
+            # month = int(input("Введите номер месяца: "))
+            continue
         if 1 <= month <= 12:
             choose_month()
         if month in list_31:
