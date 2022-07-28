@@ -27,6 +27,8 @@ list_30 = [4, 6, 9, 11]
 list_30_month = {'4': 'апреля', '6': 'июня', '9': 'сентября', '11': 'ноября'}
 feb = 2
 feb_month = {'2': 'февраля'}
+
+
 #
 
 def converting_exel_files_to_list_for_sog():
@@ -161,6 +163,7 @@ def list_PAT_for_template(number_of_pat):
             print("Вы ввели не правильное значение!")
             break
 
+
 def list_PM_for_template(number_of_PM):
     """Добавление данных выбранных данных ОГ в список для рендеренга страницы"""
     counter = 0
@@ -180,6 +183,7 @@ def list_PM_for_template(number_of_PM):
         except (IndexError, ValueError):
             print("Вы ввели не правильное значение!")
             break
+
 
 def list_AK_for_template(number_of_AK):
     """Добавление данных выбранных данных ОГ в список для рендеренга страницы"""
@@ -254,6 +258,7 @@ def choose_PM_from_OG():
                 print(list_of_PM_for_OG_for_template)
                 print('+' + '---------------' * 10 + '+')
 
+
 def choose_AK_from_PAT():
     list_AK_for_template(int(input('Введите номер AK для ОГ: ')))
     if len(list_of_AK_for_PAT_for_template) > 0:
@@ -265,6 +270,7 @@ def choose_AK_from_PAT():
             if len(list_of_AK_for_PAT_for_template) >= 1:
                 print(list_of_AK_for_PAT_for_template)
                 print('+' + '---------------' * 10 + '+')
+
 
 def choose_month():
     global name_month
@@ -294,138 +300,161 @@ def choose_month():
         elif month == 12:
             name_month = 'декабря'
 
-def choose_month_and_day():
-    while True:
-        global date
-        global date2
-        global month
 
+def choose_date_of_31_days():
+    global date
+    global date2
+    while True:
+        date = int(input("Введите число от 1 до 31: "))
+        if 31 < date or date < 1:
+            print("Попробуйте еще раз!")
+            continue
+        else:
+            date2 = date + 1
+            if date2 > 31:
+                date2 = 1
+                print(date, date2)
+                break
+            else:
+                print(date, date2)
+                break
+
+
+def choose_date_of_30_days():
+    global date
+    global date2
+    while True:
+        date = int(input("Введите число от 1 до 30: "))
+        if 30 < date or date < 1:
+            print("Попробуйте еще раз!")
+            continue
+        else:
+            date2 = date + 1
+            if date2 > 30:
+                date2 = 1
+                print(date, date2)
+                break
+            else:
+                print(date, date2)
+                break
+
+
+def choose_date_of_febury_days():
+    global date
+    global date2
+    while True:
+        date = int(input("Введите число от 1 до 28: "))
+        if 28 < date or date < 1:
+            print("Попробуйте еще раз!")
+            continue
+        else:
+            date2 = date + 1
+            if date2 > 28:
+                date2 = 1
+                print(date, date2)
+                break
+            else:
+                print(date, date2)
+                break
+
+
+def choose_month_and_day():
+    global month
+    while True:
         month = int(input("Введите номер месяца: "))
         if 1 <= month <= 12:
             choose_month()
-
-            if month in list_31:
-                date = int(input("Введите число от 1 до 31: "))
-                if 31 < date or date < 1:
-                    print("Попробуйте еще раз!")
-                    continue
-                else:
-                    date2 = date + 1
-                    if date2 > 31:
-                        date2 = 1
-                        print(date, date2)
-                        break
-                    else:
-                        print(date, date2)
-                        break
-            elif month in list_30:
-                date = int(input("Введите число от 1 до 30: "))
-            if 30 < date or date < 1:
-                print("Попробуйте еще раз!")
-                continue
-            else:
-                date2 = date + 1
-                if date2 > 30:
-                    date2 = 1
-                    print(date, date2)
-                    break
-                else:
-                    print(date, date2)
-                    break
+        if month in list_31:
+            choose_date_of_31_days()
+            break
+        elif month in list_30:
+            choose_date_of_30_days()
+            break
         elif month == feb:
-            date = int(input("Введите число от 1 до 28: "))
-            if 28 < date or date < 1:
-                print("Попробуйте еще раз!")
-                continue
-            else:
-                date2 = date + 1
-                if date2 > 28:
-                    date2 = 1
-                    print(date, date2)
-                    break
-                else:
-                    print(date, date2)
-                    break
+            choose_date_of_febury_days()
+            break
         else:
             print('Попробуйте еще раз!')
             continue
+
+
 #
 
 def render_template():
-# dict = {index: value for index, value in enumerate(lst}
+    # dict = {index: value for index, value in enumerate(lst}
     context_list = {
-            # 'og0': list_SOG_and_OG_for_template[0],
-            # 'og1': list_SOG_and_OG_for_template[1],
-            # 'og2': list_SOG_and_OG_for_template[2],
-            # 'og3': list_SOG_and_OG_for_template[3],
-            # 'og4': list_SOG_and_OG_for_template[4],
-            # 'og5': list_SOG_and_OG_for_template[5],
-            # 'og6': list_SOG_and_OG_for_template[6],
-            # 'og7': list_SOG_and_OG_for_template[7],
-            # 'og8': list_SOG_and_OG_for_template[8],
-            # 'pat0': list_for_PAT_for_template[0],
-            # 'pat1': list_for_PAT_for_template[1],
-            # 'pat2': list_for_PAT_for_template[2],
-            # 'pat3': list_for_PAT_for_template[3],
-            # 'pat4': list_for_PAT_for_template[4],
-            # 'pat5': list_for_PAT_for_template[5],
-            # 'pat6': list_for_PAT_for_template[6],
-            # 'pat7': list_for_PAT_for_template[7],
-            # 'pat8': list_for_PAT_for_template[8],
-            # 'pat9': list_for_PAT_for_template[9],
-            # 'pat10': list_for_PAT_for_template[10],
-            # 'pat11': list_for_PAT_for_template[11],
-            # 'pat12': list_for_PAT_for_template[12],
-            # 'pat13': list_for_PAT_for_template[13],
-            # 'pat14': list_for_PAT_for_template[14],
-            # 'pat15': list_for_PAT_for_template[15],
-            # 'pat16': list_for_PAT_for_template[16],
-            # 'pat17': list_for_PAT_for_template[17],
-            # 'pat18': list_for_PAT_for_template[18],
-            # 'pat19': list_for_PAT_for_template[19],
-            # 'pat20': list_for_PAT_for_template[20],
-            # 'pat21': list_for_PAT_for_template[21],
-            # 'pat22': list_for_PAT_for_template[22],
-            # 'pat23': list_for_PAT_for_template[23],
-            # 'pat24': list_for_PAT_for_template[24],
-            # 'pm0': list_of_PM_for_OG_for_template[0],
-            # 'pm1': list_of_PM_for_OG_for_template[1],
-            # 'pm2': list_of_PM_for_OG_for_template[2],
-            # 'pm3': list_of_PM_for_OG_for_template[3],
-            # 'pm4': list_of_PM_for_OG_for_template[4],
-            # 'pm5': list_of_PM_for_OG_for_template[5],
-            # 'pm6': list_of_PM_for_OG_for_template[6],
-            # 'pm7': list_of_PM_for_OG_for_template[7],
-            # 'pm8': list_of_PM_for_OG_for_template[8],
-            # 'ak0': list_of_AK_for_PAT_for_template[0],
-            # 'ak1': list_of_AK_for_PAT_for_template[1],
-            # 'ak2': list_of_AK_for_PAT_for_template[2],
-            # 'ak3': list_of_AK_for_PAT_for_template[3],
-            # 'ak4': list_of_AK_for_PAT_for_template[4],
-            # 'ak5': list_of_AK_for_PAT_for_template[5],
-            # 'ak6': list_of_AK_for_PAT_for_template[6],
-            # 'ak7': list_of_AK_for_PAT_for_template[7],
-            # 'ak8': list_of_AK_for_PAT_for_template[8],
-            # 'ak9': list_of_AK_for_PAT_for_template[9],
-            # 'ak10': list_of_AK_for_PAT_for_template[10],
-            # 'ak11': list_of_AK_for_PAT_for_template[11],
-            # 'ak12': list_of_AK_for_PAT_for_template[12],
-            # 'ak13': list_of_AK_for_PAT_for_template[13],
-            # 'ak14': list_of_AK_for_PAT_for_template[14],
-            # 'ak15': list_of_AK_for_PAT_for_template[15],
-            # 'ak16': list_of_AK_for_PAT_for_template[16],
-            # 'ak17': list_of_AK_for_PAT_for_template[17],
-            # 'ak18': list_of_AK_for_PAT_for_template[18],
-            # 'ak19': list_of_AK_for_PAT_for_template[19],
-            # 'ak20': list_of_AK_for_PAT_for_template[20],
-            # 'ak21': list_of_AK_for_PAT_for_template[21],
-            # 'ak22': list_of_AK_for_PAT_for_template[22],
-            # 'ak23': list_of_AK_for_PAT_for_template[23],
-            # 'ak24': list_of_AK_for_PAT_for_template[24],
-            'number1': date,
-            'number2': date2,
-            'month': name_month
-        }
+        # 'og0': list_SOG_and_OG_for_template[0],
+        # 'og1': list_SOG_and_OG_for_template[1],
+        # 'og2': list_SOG_and_OG_for_template[2],
+        # 'og3': list_SOG_and_OG_for_template[3],
+        # 'og4': list_SOG_and_OG_for_template[4],
+        # 'og5': list_SOG_and_OG_for_template[5],
+        # 'og6': list_SOG_and_OG_for_template[6],
+        # 'og7': list_SOG_and_OG_for_template[7],
+        # 'og8': list_SOG_and_OG_for_template[8],
+        # 'pat0': list_for_PAT_for_template[0],
+        # 'pat1': list_for_PAT_for_template[1],
+        # 'pat2': list_for_PAT_for_template[2],
+        # 'pat3': list_for_PAT_for_template[3],
+        # 'pat4': list_for_PAT_for_template[4],
+        # 'pat5': list_for_PAT_for_template[5],
+        # 'pat6': list_for_PAT_for_template[6],
+        # 'pat7': list_for_PAT_for_template[7],
+        # 'pat8': list_for_PAT_for_template[8],
+        # 'pat9': list_for_PAT_for_template[9],
+        # 'pat10': list_for_PAT_for_template[10],
+        # 'pat11': list_for_PAT_for_template[11],
+        # 'pat12': list_for_PAT_for_template[12],
+        # 'pat13': list_for_PAT_for_template[13],
+        # 'pat14': list_for_PAT_for_template[14],
+        # 'pat15': list_for_PAT_for_template[15],
+        # 'pat16': list_for_PAT_for_template[16],
+        # 'pat17': list_for_PAT_for_template[17],
+        # 'pat18': list_for_PAT_for_template[18],
+        # 'pat19': list_for_PAT_for_template[19],
+        # 'pat20': list_for_PAT_for_template[20],
+        # 'pat21': list_for_PAT_for_template[21],
+        # 'pat22': list_for_PAT_for_template[22],
+        # 'pat23': list_for_PAT_for_template[23],
+        # 'pat24': list_for_PAT_for_template[24],
+        # 'pm0': list_of_PM_for_OG_for_template[0],
+        # 'pm1': list_of_PM_for_OG_for_template[1],
+        # 'pm2': list_of_PM_for_OG_for_template[2],
+        # 'pm3': list_of_PM_for_OG_for_template[3],
+        # 'pm4': list_of_PM_for_OG_for_template[4],
+        # 'pm5': list_of_PM_for_OG_for_template[5],
+        # 'pm6': list_of_PM_for_OG_for_template[6],
+        # 'pm7': list_of_PM_for_OG_for_template[7],
+        # 'pm8': list_of_PM_for_OG_for_template[8],
+        # 'ak0': list_of_AK_for_PAT_for_template[0],
+        # 'ak1': list_of_AK_for_PAT_for_template[1],
+        # 'ak2': list_of_AK_for_PAT_for_template[2],
+        # 'ak3': list_of_AK_for_PAT_for_template[3],
+        # 'ak4': list_of_AK_for_PAT_for_template[4],
+        # 'ak5': list_of_AK_for_PAT_for_template[5],
+        # 'ak6': list_of_AK_for_PAT_for_template[6],
+        # 'ak7': list_of_AK_for_PAT_for_template[7],
+        # 'ak8': list_of_AK_for_PAT_for_template[8],
+        # 'ak9': list_of_AK_for_PAT_for_template[9],
+        # 'ak10': list_of_AK_for_PAT_for_template[10],
+        # 'ak11': list_of_AK_for_PAT_for_template[11],
+        # 'ak12': list_of_AK_for_PAT_for_template[12],
+        # 'ak13': list_of_AK_for_PAT_for_template[13],
+        # 'ak14': list_of_AK_for_PAT_for_template[14],
+        # 'ak15': list_of_AK_for_PAT_for_template[15],
+        # 'ak16': list_of_AK_for_PAT_for_template[16],
+        # 'ak17': list_of_AK_for_PAT_for_template[17],
+        # 'ak18': list_of_AK_for_PAT_for_template[18],
+        # 'ak19': list_of_AK_for_PAT_for_template[19],
+        # 'ak20': list_of_AK_for_PAT_for_template[20],
+        # 'ak21': list_of_AK_for_PAT_for_template[21],
+        # 'ak22': list_of_AK_for_PAT_for_template[22],
+        # 'ak23': list_of_AK_for_PAT_for_template[23],
+        # 'ak24': list_of_AK_for_PAT_for_template[24],
+        'number1': date,
+        'number2': date2,
+        'month': name_month
+    }
     doc.render(context_list)
 
 
@@ -497,14 +526,3 @@ choose_month_and_day()
 
 render_template()
 doc.save('probe3.docx')
-
-
-
-
-
-
-
-
-
-
-
