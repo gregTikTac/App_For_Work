@@ -12,6 +12,8 @@ sheet = file_for_work.active
 list_of_sog = []  # сокращенный список
 list_of_og = []  # полный список
 list_of_pat = []
+list_PM = []
+list_AK = []
 
 
 def converting_exel_files_to_list_for_sog():
@@ -32,6 +34,16 @@ def converting_exel_files_to_list_for_PAT():
         list_of_pat.append(str(row[2].value))
 
 
+def converting_exel_files_to_list_PM_for_OG():
+    """Конвертирует данные из 4 столбца таблицы exel в список"""
+    for row in sheet.rows:
+        list_PM.append(str(row[3].value))
+
+
+def converting_exel_files_to_list_AK_for_PAT():
+    """Конвертирует данные из 5 столбца таблицы exel в список"""
+    for row in sheet.rows:
+        list_AK.append(str(row[4].value))
 #
 # def print_all_month():
 #     for key, value in list_of_month.items():
@@ -50,7 +62,7 @@ def converting_exel_files_to_list_for_PAT():
 window = Tk()  # объект окна
 
 window.title('GUI для работы')
-window.geometry('1300x800+150+050')
+window.geometry('1300x750+150+050')
 window.resizable(False, False)
 # label месяца
 lbl_month = Label(window, text='Выберете месяц:', width=100, anchor=W)
@@ -103,7 +115,7 @@ select_SOG.current(0)
 select_SOG.bind("<<ComboboxSelected>>")
 
 select_OG = ttk.Combobox(window, values=list_of_og, width=60)
-select_OG.place(rely=0.25, anchor=W)
+select_OG.place(rely=0.24, anchor=W)
 select_OG.current(0)
 select_OG.bind("<<ComboboxSelected>>")
 
@@ -120,34 +132,34 @@ select_SOG.current(0)
 select_SOG.bind("<<ComboboxSelected>>")
 
 select_OG = ttk.Combobox(window, values=list_of_og, width=60)
-select_OG.place(rely=0.37, anchor=W)
-select_SOG.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_OG.place(rely=0.36, anchor=W)
+select_OG.current(0)
+select_OG.bind("<<ComboboxSelected>>")
 
 select_OG = ttk.Combobox(window, values=list_of_og, width=60)
-select_OG.place(rely=0.41, anchor=W)
-select_SOG.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_OG.place(rely=0.39, anchor=W)
+select_OG.current(0)
+select_OG.bind("<<ComboboxSelected>>")
+
+select_OG = ttk.Combobox(window, values=list_of_og, width=60)
+select_OG.place(rely=0.421, anchor=W)
+select_OG.current(0)
+select_OG.bind("<<ComboboxSelected>>")
 
 select_OG = ttk.Combobox(window, values=list_of_og, width=60)
 select_OG.place(rely=0.45, anchor=W)
-select_SOG.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_OG.current(0)
+select_OG.bind("<<ComboboxSelected>>")
 
 select_OG = ttk.Combobox(window, values=list_of_og, width=60)
-select_OG.place(rely=0.49, anchor=W)
-select_SOG.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_OG.place(rely=0.481, anchor=W)
+select_OG.current(0)
+select_OG.bind("<<ComboboxSelected>>")
 
 select_OG = ttk.Combobox(window, values=list_of_og, width=60)
-select_OG.place(rely=0.53, anchor=W)
-select_SOG.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
-
-select_OG = ttk.Combobox(window, values=list_of_og, width=60)
-select_OG.place(rely=0.57, anchor=W)
-select_SOG.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_OG.place(rely=0.512, anchor=W)
+select_OG.current(0)
+select_OG.bind("<<ComboboxSelected>>")
 
 
 # ПАТ
@@ -282,5 +294,43 @@ select_PAT.place(relx=0.35, rely=0.76)
 select_PAT.current(0)
 select_SOG.bind("<<ComboboxSelected>>")
 
+
+#ПМ
+converting_exel_files_to_list_PM_for_OG()
+del list_PM[0]
+lbl_PM_shorted_OG = Label(window, text='ПМ для ОГ сокращенного состава:', anchor=W)
+lbl_PM_shorted_OG.place(rely=0.56)
+
+select_PM = ttk.Combobox(window, values=list_PM, width=40)
+select_PM.place(rely=0.585)
+
+select_PM = ttk.Combobox(window, values=list_PM, width=40)
+select_PM.place(rely=0.615)
+
+
+
+lbl_PM_full_OG = Label(window, text='ПМ для ОГ полного состава:', anchor=W)
+lbl_PM_full_OG.place(rely=0.65)
+
+select_PM = ttk.Combobox(window, values=list_PM, width=60)
+select_PM.place(rely=0.675)
+
+select_PM = ttk.Combobox(window, values=list_PM, width=60)
+select_PM.place(rely=0.705)
+
+select_PM = ttk.Combobox(window, values=list_PM, width=60)
+select_PM.place(rely=0.735)
+
+select_PM = ttk.Combobox(window, values=list_PM, width=60)
+select_PM.place(rely=0.765)
+
+select_PM = ttk.Combobox(window, values=list_PM, width=60)
+select_PM.place(rely=0.795)
+
+select_PM = ttk.Combobox(window, values=list_PM, width=60)
+select_PM.place(rely=0.825)
+
+select_PM = ttk.Combobox(window, values=list_PM, width=60)
+select_PM.place(rely=0.855)
 
 window.mainloop()  # главный цикл
