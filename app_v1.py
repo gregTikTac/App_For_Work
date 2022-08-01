@@ -77,6 +77,9 @@ select_date.place(rely=0.13, anchor=W)
 select_date.current(0)
 select_date.bind("<<ComboboxSelected>>", choose_date)
 
+
+
+# ОГ сокращенного состава
 lbl_OG_shorted = Label(window, text='Выберете ОГ сокращенного сотава:', anchor=W)
 lbl_OG_shorted.place(rely=0.17)
 
@@ -86,12 +89,12 @@ def choose_shorted_OG(event):
     print(select_OG)
 
 
-
 converting_exel_files_to_list_for_sog()
 converting_exel_files_to_list_for_og()
 del list_of_og[0]
 del list_of_sog[0]
 del list_of_sog[-8:]
+
 select_SOG = ttk.Combobox(window, values=list_of_sog, width=60)
 select_SOG.place(rely=0.21, anchor=W)
 select_SOG.current(0)
@@ -103,12 +106,53 @@ select_OG.current(0)
 select_OG.bind("<<ComboboxSelected>>", choose_shorted_OG)
 
 
+
+# ОГ полного состава
 lbl_OG_full = Label(window, text='Выберете ОГ полного состава:', anchor=W)
 lbl_OG_full.place(rely=0.29)
 
+def choose_full_OG(event):
+    print(select_SOG.get())
+    print(select_OG.get())
+    print(select_OG.get())
+    print(select_OG.get())
+    print(select_OG.get())
+    print(select_OG.get())
+    print(select_OG.get())
 
+select_SOG = ttk.Combobox(window, values=list_of_sog, width=60)
+select_SOG.place(rely=0.33, anchor=W)
+select_SOG.current(0)
+select_SOG.bind("<<ComboboxSelected>>", choose_full_OG)
 
+select_OG = ttk.Combobox(window, values=list_of_og, width=60)
+select_OG.place(rely=0.37, anchor=W)
+select_SOG.current(0)
+select_SOG.bind("<<ComboboxSelected>>", choose_full_OG)
 
+select_OG = ttk.Combobox(window, values=list_of_og, width=60)
+select_OG.place(rely=0.41, anchor=W)
+select_SOG.current(0)
+select_SOG.bind("<<ComboboxSelected>>", choose_full_OG)
 
+select_OG = ttk.Combobox(window, values=list_of_og, width=60)
+select_OG.place(rely=0.45, anchor=W)
+select_SOG.current(0)
+select_SOG.bind("<<ComboboxSelected>>", choose_full_OG)
+
+select_OG = ttk.Combobox(window, values=list_of_og, width=60)
+select_OG.place(rely=0.49, anchor=W)
+select_SOG.current(0)
+select_SOG.bind("<<ComboboxSelected>>", choose_full_OG)
+
+select_OG = ttk.Combobox(window, values=list_of_og, width=60)
+select_OG.place(rely=0.53, anchor=W)
+select_SOG.current(0)
+select_SOG.bind("<<ComboboxSelected>>", choose_full_OG)
+
+select_OG = ttk.Combobox(window, values=list_of_og, width=60)
+select_OG.place(rely=0.57, anchor=W)
+select_SOG.current(0)
+select_SOG.bind("<<ComboboxSelected>>", choose_full_OG)
 
 window.mainloop()  # главный цикл
