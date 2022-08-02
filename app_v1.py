@@ -62,8 +62,8 @@ def converting_exel_files_to_list_AK_for_PAT():
 window = Tk()  # объект окна
 
 window.title('GUI для работы')
-window.geometry('1300x750+150+050')
-window.resizable(False, False)
+window.geometry('1200x650+150+050')
+# window.resizable(False, False)
 # label месяца
 lbl_month = Label(window, text='Выберете месяц:', width=100, anchor=W)
 lbl_month.place(rely=0.01)
@@ -172,127 +172,127 @@ del list_of_pat[0]
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.04)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.07)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.10)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.13)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.16)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.19)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.22)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.25)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.28)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.31)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.34)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.37)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.40)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.43)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.460)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.491)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.52)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.55)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.58)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.61)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.64)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.67)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.70)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.73)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 select_PAT = ttk.Combobox(window, values=list_of_pat, width=40)
 select_PAT.place(relx=0.35, rely=0.76)
 select_PAT.current(0)
-select_SOG.bind("<<ComboboxSelected>>")
+select_PAT.bind("<<ComboboxSelected>>")
 
 
 #ПМ
@@ -332,5 +332,137 @@ select_PM.place(rely=0.825)
 
 select_PM = ttk.Combobox(window, values=list_PM, width=60)
 select_PM.place(rely=0.855)
+
+
+# АК для Пат
+converting_exel_files_to_list_AK_for_PAT()
+del list_AK[0]
+lbl_PAT = Label(window, text='АК для ПАТ:', anchor=W)
+lbl_PAT.place(relx=0.60, rely=0.01)
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.04)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.07)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.10)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.13)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.16)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.19)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.22)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.25)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.28)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.31)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.34)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.37)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.40)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.43)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.460)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.491)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.52)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.55)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.58)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.61)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.64)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.67)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.70)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.73)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
+
+select_AK = ttk.Combobox(window, values=list_AK, width=40)
+select_AK.place(relx=0.60, rely=0.76)
+select_AK.current(0)
+select_AK.bind("<<ComboboxSelected>>")
 
 window.mainloop()  # главный цикл
