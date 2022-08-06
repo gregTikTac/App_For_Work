@@ -111,18 +111,16 @@ select_pm_for_full_og7 = Block(window, label=None, combobox=ttk.Combobox(values=
 # ПАТ
 converting_exel_files_to_list_for_PAT()
 
-
-select_pat1 = Block(window, label=Label(window, text="ГР. УПР.:").grid(row=1, column=2),
+lbl_pat = Label(window, text='Выберете ПАТ:').grid(row=0, column=2)
+select_pat1 = Block(window, label=Label(window, text="ГР. УПР.").grid(row=1, column=2),
                     combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=2, column=2))
 select_pat2 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=3, column=2))
 
-
-select_pat3 = Block(window, label=Label(window, text="Гр. Рзвд.").grid(row=4, column=2),
+select_pat3 = Block(window, label=Label(window, text="ГР. РЗВД.").grid(row=4, column=2),
                     combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=5, column=2))
 select_pat4 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=6, column=2))
 
-
-select_pat5 = Block(window, label=Label(window, text="Гр. БЛК.").grid(row=7, column=2),
+select_pat5 = Block(window, label=Label(window, text="ГР. БЛК.").grid(row=7, column=2),
                     combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=8, column=2))
 select_pat6 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=9, column=2))
 select_pat7 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=10, column=2))
@@ -132,33 +130,73 @@ select_pat10 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pa
 select_pat11 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=14, column=2))
 select_pat12 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=15, column=2))
 
-
-select_pat13 = Block(window, label=Label(window, text="Гр. Огн.П.").grid(row=16, column=2),
+select_pat13 = Block(window, label=Label(window, text="ГР. ОГН.П.").grid(row=16, column=2),
                      combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=17, column=2))
 select_pat14 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=18, column=2))
 select_pat15 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=19, column=2))
 
-
-select_pat16 = Block(window, label=Label(window, text="Гр. РЗВР.").grid(row=20, column=2),
+select_pat16 = Block(window, label=Label(window, text="ГР. РЗВР.").grid(row=20, column=2),
                      combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=21, column=2))
 select_pat17 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=22, column=2))
 select_pat18 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=23, column=2))
 select_pat19 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=24, column=2))
 
-
 select_pat20 = Block(window, label=Label(window, text="ОТД. РЗМР.").grid(row=25, column=2),
                      combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=26, column=2))
 select_pat21 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=27, column=2))
 
-select_pat22 = Block(window, label=Label(window, text="ОТД. РХБЗ.").grid(row=25, column=2),
-                     combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=26, column=2))
-select_pat23 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=27, column=2))
-
-select_pat24 = Block(window, label=Label(window, text="ОТД. МЕД.").grid(row=28, column=2),
+select_pat22 = Block(window, label=Label(window, text="ОТД. РХБЗ.").grid(row=28, column=2),
                      combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=29, column=2))
-select_pat25 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=30, column=2))
-#
-#
+select_pat23 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=30, column=2))
+
+select_pat24 = Block(window, label=Label(window, text="ОТД. МЕД.").grid(row=31, column=2),
+                     combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=32, column=2))
+select_pat25 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=33, column=2))
+
+# # AK
+converting_exel_files_to_list_AK_for_PAT()
+lbl_ak_for_pat = Label(window, text='AK for PAT:').grid(row=0, column=3)
+select_ak_for_pat1 = Block(window, label=Label(window, text="ГР. УПР.").grid(row=1, column=3),
+                           combobox=ttk.Combobox(values=list_AK, width=60).grid(row=2, column=3))
+select_ak_for_pat2 = Block(window, label=None, combobox=ttk.Combobox(values=list_AK, width=60).grid(row=3, column=3))
+
+select_ak_for_pat3 = Block(window, label=Label(window, text="ГР. РЗВД").grid(row=4, column=3),
+                           combobox=ttk.Combobox(values=list_AK, width=60).grid(row=5, column=3))
+select_ak_for_pat4 = Block(window, label=None, combobox=ttk.Combobox(values=list_AK, width=60).grid(row=6, column=3))
+
+select_ak_for_pat5 = Block(window, label=Label(window, text="ГР. БЛКР").grid(row=7, column=3),
+                           combobox=ttk.Combobox(values=list_AK, width=60).grid(row=8, column=3))
+select_ak_for_pat6 = Block(window, label=None, combobox=ttk.Combobox(values=list_AK, width=60).grid(row=9, column=3))
+select_ak_for_pat7 = Block(window, label=None, combobox=ttk.Combobox(values=list_AK, width=60).grid(row=10, column=3))
+select_ak_for_pat8 = Block(window, label=None, combobox=ttk.Combobox(values=list_AK, width=60).grid(row=11, column=3))
+select_ak_for_pat9 = Block(window, label=None, combobox=ttk.Combobox(values=list_AK, width=60).grid(row=12, column=3))
+select_ak_for_pat10 = Block(window, label=None, combobox=ttk.Combobox(values=list_AK, width=60).grid(row=13, column=3))
+select_ak_for_pat11 = Block(window, label=None, combobox=ttk.Combobox(values=list_AK, width=60).grid(row=14, column=3))
+select_ak_for_pat12 = Block(window, label=None, combobox=ttk.Combobox(values=list_AK, width=60).grid(row=15, column=3))
+
+select_ak_for_pat13 = Block(window, label=Label(window, text="ГР. ОГН.П").grid(row=16, column=3),
+                            combobox=ttk.Combobox(values=list_AK, width=60).grid(row=17, column=3))
+select_ak_for_pat14 = Block(window, label=None, combobox=ttk.Combobox(values=list_AK, width=60).grid(row=18, column=3))
+select_ak_for_pat15 = Block(window, label=None, combobox=ttk.Combobox(values=list_AK, width=60).grid(row=19, column=3))
+
+select_ak_for_pat16 = Block(window, label=Label(window, text="ГР. РЗРВ.").grid(row=20, column=3),
+                            combobox=ttk.Combobox(values=list_AK, width=60).grid(row=21, column=3))
+select_ak_for_pat17 = Block(window, label=None, combobox=ttk.Combobox(values=list_AK, width=60).grid(row=22, column=3))
+select_ak_for_pat18 = Block(window, label=None, combobox=ttk.Combobox(values=list_AK, width=60).grid(row=23, column=3))
+select_ak_for_pat19 = Block(window, label=None, combobox=ttk.Combobox(values=list_AK, width=60).grid(row=24, column=3))
+
+
+select_ak_for_pat20 = Block(window, label=Label(window, text="ГР. РЗМВ.").grid(row=25, column=3),
+                            combobox=ttk.Combobox(values=list_AK, width=60).grid(row=26, column=3))
+select_ak_for_pat21 = Block(window, label=None, combobox=ttk.Combobox(values=list_AK, width=60).grid(row=27, column=3))
+
+select_ak_for_pat22 = Block(window, label=Label(window, text="ОТД. РХБЗ.").grid(row=28, column=3),
+                            combobox=ttk.Combobox(values=list_AK, width=60).grid(row=29, column=3))
+select_ak_for_pat23 = Block(window, label=None, combobox=ttk.Combobox(values=list_AK, width=60).grid(row=30, column=3))
+
+select_ak_for_pat24 = Block(window, label=Label(window, text="ОТД. МЕД.").grid(row=31, column=3),
+                            combobox=ttk.Combobox(values=list_AK, width=60).grid(row=32, column=3))
+select_ak_for_pat25 = Block(window, label=None, combobox=ttk.Combobox(values=list_AK, width=60).grid(row=33, column=3))
 
 
 # def choose_month(event):
