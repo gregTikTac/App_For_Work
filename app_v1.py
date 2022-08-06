@@ -46,53 +46,45 @@ def converting_exel_files_to_list_AK_for_PAT():
         list_AK.append(str(row[4].value))
 
 
-#
-# def print_all_month():
-#     for key, value in list_of_month.items():
-#         print(f'  {key} - {value}')
-#     print('+' + '_ _ _' * 15 + '+')
-#
-#
-# def choose_num_month(num_month):
-#     for key, value in enumerate(list_of_month):
-#         print(key, value)
-#
-#
-#
-# print_all_month()
-# choose_num_month(num_month=input("Введите номер месяца: "))
 window = Tk()  # объект окна
 
 window.title('GUI для работы')
-window.geometry('1200x650+150+050')
+window.geometry('1200x700+150+050')
 
 
 # window.resizable(False, False)
 
 
 class Block:
+    """Блок лейбл и комбобос виджетов"""
+
     def __init__(self, window, label, combobox):
         self.window = window
         self.label = label
         self.combobox = combobox
 
 
+# месяц
 select_month = Block(window, label=Label(text="Выберете месяц: ").grid(),
                      combobox=ttk.Combobox(
                          values=['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля',
                                  'августа', 'сентября', 'октября', 'ноября', 'декабря'],
                          width=40).grid())
 
+# дата
 select_date = Block(window, label=Label(text="Выберете дату:").grid(),
                     combobox=ttk.Combobox(values=[i for i in range(1, 32)], width=40).grid())
 
 converting_exel_files_to_list_for_sog()
 converting_exel_files_to_list_for_og()
+
+# ОГ сокращенного состава
 select_shorted_SOG = Block(window, label=Label(text='Выберете CОГ сокращенного сотава:').grid(),
                            combobox=ttk.Combobox(values=list_of_sog, width=60).grid())
 
 select_shorted_OG = Block(window, label=None, combobox=ttk.Combobox(values=list_of_og, width=60).grid())
 
+# ОГ полного состава
 select_full_squad = Block(window, label=Label(text='Выберете ОГ полного сотава:').grid(),
                           combobox=ttk.Combobox(values=list_of_sog, width=60).grid())
 select_full_squad2 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_og, width=60).grid())
@@ -101,6 +93,74 @@ select_full_squad4 = Block(window, label=None, combobox=ttk.Combobox(values=list
 select_full_squad5 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_og, width=60).grid())
 select_full_squad6 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_og, width=60).grid())
 #
+# ПМ
+converting_exel_files_to_list_PM_for_OG()
+select_pm_for_shorted_og1 = Block(window, label=Label(window, text="Выберете PM for shorted squad:").grid(),
+                                  combobox=ttk.Combobox(values=list_of_sog, width=60).grid())
+select_pm_for_shorted_og2 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_sog, width=60).grid())
+
+select_pm_for_full_og1 = Block(window, label=Label(window, text="Выберете PM for full squad:").grid(),
+                               combobox=ttk.Combobox(values=list_of_sog, width=60).grid())
+select_pm_for_full_og2 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_sog, width=60).grid())
+select_pm_for_full_og3 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_sog, width=60).grid())
+select_pm_for_full_og4 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_sog, width=60).grid())
+select_pm_for_full_og5 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_sog, width=60).grid())
+select_pm_for_full_og6 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_sog, width=60).grid())
+select_pm_for_full_og7 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_sog, width=60).grid())
+
+# ПАТ
+converting_exel_files_to_list_for_PAT()
+
+
+select_pat1 = Block(window, label=Label(window, text="ГР. УПР.:").grid(row=1, column=2),
+                    combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=2, column=2))
+select_pat2 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=3, column=2))
+
+
+select_pat3 = Block(window, label=Label(window, text="Гр. Рзвд.").grid(row=4, column=2),
+                    combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=5, column=2))
+select_pat4 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=6, column=2))
+
+
+select_pat5 = Block(window, label=Label(window, text="Гр. БЛК.").grid(row=7, column=2),
+                    combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=8, column=2))
+select_pat6 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=9, column=2))
+select_pat7 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=10, column=2))
+select_pat8 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=11, column=2))
+select_pat9 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=12, column=2))
+select_pat10 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=13, column=2))
+select_pat11 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=14, column=2))
+select_pat12 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=15, column=2))
+
+
+select_pat13 = Block(window, label=Label(window, text="Гр. Огн.П.").grid(row=16, column=2),
+                     combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=17, column=2))
+select_pat14 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=18, column=2))
+select_pat15 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=19, column=2))
+
+
+select_pat16 = Block(window, label=Label(window, text="Гр. РЗВР.").grid(row=20, column=2),
+                     combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=21, column=2))
+select_pat17 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=22, column=2))
+select_pat18 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=23, column=2))
+select_pat19 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=24, column=2))
+
+
+select_pat20 = Block(window, label=Label(window, text="ОТД. РЗМР.").grid(row=25, column=2),
+                     combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=26, column=2))
+select_pat21 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=27, column=2))
+
+select_pat22 = Block(window, label=Label(window, text="ОТД. РХБЗ.").grid(row=25, column=2),
+                     combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=26, column=2))
+select_pat23 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=27, column=2))
+
+select_pat24 = Block(window, label=Label(window, text="ОТД. МЕД.").grid(row=28, column=2),
+                     combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=29, column=2))
+select_pat25 = Block(window, label=None, combobox=ttk.Combobox(values=list_of_pat, width=60).grid(row=30, column=2))
+#
+#
+
+
 # def choose_month(event):
 #     """обработчик событий"""
 #     print(select_month.current(), select_month.get())
