@@ -203,10 +203,18 @@ class App(tk.Tk):
             self.com.grid(row=item, column=3)
             self.com.bind('<<ComboboxSelected>>', self.add_entry)
 
+        self.btn = tk.Button(text='push me!', width=10, heigh=3)
+        self.btn.grid(row=10, column=4)
+        self.btn.bind('<Button-1>', self.push_btn)
+
+    def push_btn(self, event):
+        print(list_for_render)
+
     def add_entry(self, event):
         print(self.variable.get())
         if event:
-            print('event:', event.widget.get())
+            print(f'выбрано: {event.widget.get()}')
+            list_for_render.append(event.widget.get())
 
 
 app = App()
