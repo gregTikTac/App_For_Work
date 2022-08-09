@@ -63,7 +63,9 @@ class App(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title('GUI for work')
-        self.geometry('1200x700+150+050')
+        self.geometry('900x800+250+0')
+        self.iconbitmap('arm.ico')
+        self.resizable(False, False)
 
         self.variable = tk.StringVar()
 
@@ -75,45 +77,45 @@ class App(tk.Tk):
 
         self.label_days = ttk.Label(text="Выберете дату:").grid()
         self.combobox_days = ttk.Combobox(values=[i for i in range(1, 32)], width=40)
-        self.combobox_days.grid()
+        self.combobox_days.grid(padx=10, pady=1)
         self.combobox_days.bind('<<ComboboxSelected>>', self.add_entry_date)
-        # self.combobox_day = ttk.Combobox(values=[i for i in range(1, 32)], width=40)
-        # self.combobox_day.grid()
-        # self.combobox_day.bind('<<ComboboxSelected>>', self.add_entry)
+        self.combobox_day = ttk.Combobox(values=[i for i in range(1, 32)], width=40)
+        self.combobox_day.grid(pady=1)
+        self.combobox_day.bind('<<ComboboxSelected>>', self.add_entry_date)
 
         # OG
         self.label_shorted_og = ttk.Label(text="Выберете ОГ сокращенного состава:").grid()
         self.combobox_sog = ttk.Combobox(values=list_of_sog, width=40)
-        self.combobox_sog.grid()
+        self.combobox_sog.grid(pady=1)
         self.combobox_sog.bind('<<ComboboxSelected>>', self.add_entry_shorted_og)
         self.combobox_og = ttk.Combobox(values=list_of_og, width=40)
-        self.combobox_og.grid()
+        self.combobox_og.grid(pady=1)
         self.combobox_og.bind('<<ComboboxSelected>>', self.add_entry_shorted_og)
 
         # OG FULL
         self.label_full_squad = ttk.Label(text="Выберете ОГ полного состава:").grid()
         self.combobox_full_sog = ttk.Combobox(values=list_of_sog, width=40)
-        self.combobox_full_sog.grid()
+        self.combobox_full_sog.grid(pady=1)
         self.combobox_full_sog.bind('<<ComboboxSelected>>', self.add_entry_full_og)
         for item in range(1, 7):
             self.com = ttk.Combobox(values=list_of_og, width=40)
-            self.com.grid()
+            self.com.grid(pady=1)
             self.com.bind('<<ComboboxSelected>>', self.add_entry_full_og)
 
         # PM
         self.label_shorted_PM = ttk.Label(text="Выберете PM для ОГ сокращенного состава:").grid()
         self.combobox_pm_for_shorted_sog = ttk.Combobox(values=list_PM, width=40)
-        self.combobox_pm_for_shorted_sog.grid()
+        self.combobox_pm_for_shorted_sog.grid(pady=2)
         self.combobox_pm_for_shorted_sog.bind('<<ComboboxSelected>>', self.add_entry_shorted_og_pm)
 
         self.combobox_pm_for_shorted_og = ttk.Combobox(values=list_PM, width=40)
-        self.combobox_pm_for_shorted_og.grid()
+        self.combobox_pm_for_shorted_og.grid(pady=1)
         self.combobox_pm_for_shorted_og.bind('<<ComboboxSelected>>', self.add_entry_shorted_og_pm)
 
         self.label_full_PM = ttk.Label(text="Выберете PM для ОГ полного состава:").grid()
         for item in range(1, 8):
             self.com = ttk.Combobox(values=list_PM, width=40)
-            self.com.grid()
+            self.com.grid(pady=1)
             self.com.bind('<<ComboboxSelected>>', self.add_entry_full_og_pm)
 
         # PAT
@@ -121,7 +123,7 @@ class App(tk.Tk):
         self.label_control_group = ttk.Label(text="Control group").grid(row=1, column=2)
         for item in range(2, 4):
             self.com = ttk.Combobox(values=list_of_pat, width=40)
-            self.com.grid(row=item, column=2)
+            self.com.grid(row=item, column=2, padx=40, pady=1)
             self.com.bind('<<ComboboxSelected>>', self.add_entry_pat)
 
         self.label_ranger_group = ttk.Label(text="ranger group").grid(row=4, column=2)
@@ -139,31 +141,31 @@ class App(tk.Tk):
         self.label_fire_group = ttk.Label(text="fire group").grid(row=16, column=2)
         for item in range(17, 20):
             self.com = ttk.Combobox(values=list_of_pat, width=40)
-            self.com.grid(row=item, column=2)
+            self.com.grid(row=item, column=2, pady=1)
             self.com.bind('<<ComboboxSelected>>', self.add_entry_pat)
 
         self.label_reserve_group = ttk.Label(text="reserve group").grid(row=20, column=2)
         for item in range(21, 25):
             self.com = ttk.Combobox(values=list_of_pat, width=40)
-            self.com.grid(row=item, column=2)
+            self.com.grid(row=item, column=2, pady=1)
             self.com.bind('<<ComboboxSelected>>', self.add_entry_pat)
 
         self.label_sappers_group = ttk.Label(text="sappers group").grid(row=25, column=2)
         for item in range(26, 28):
             self.com = ttk.Combobox(values=list_of_pat, width=40)
-            self.com.grid(row=item, column=2)
+            self.com.grid(row=item, column=2, pady=1)
             self.com.bind('<<ComboboxSelected>>', self.add_entry_pat)
 
         self.label_rhb_group = ttk.Label(text="rhb group").grid(row=28, column=2)
         for item in range(29, 31):
             self.com = ttk.Combobox(values=list_of_pat, width=40)
-            self.com.grid(row=item, column=2)
+            self.com.grid(row=item, column=2, pady=1)
             self.com.bind('<<ComboboxSelected>>', self.add_entry_pat)
 
         self.label_med_group = ttk.Label(text="med group").grid(row=31, column=2)
         for item in range(32, 34):
             self.com = ttk.Combobox(values=list_of_pat, width=40)
-            self.com.grid(row=item, column=2)
+            self.com.grid(row=item, column=2, pady=1)
             self.com.bind('<<ComboboxSelected>>', self.add_entry_pat)
 
         # AK
@@ -216,8 +218,8 @@ class App(tk.Tk):
             self.com.grid(row=item, column=3)
             self.com.bind('<<ComboboxSelected>>', self.add_entry_pat_ak)
 
-        self.btn = tk.Button(text='push me!', width=10, heigh=3)
-        self.btn.grid(row=10, column=4)
+        self.btn = tk.Button(text='Сгенерировать документ', width=36, heigh=6, bg='green')
+        self.btn.place(relx=0.01, rely=0.8)
         self.btn.bind('<Button-1>', self.render_template)
 
     # def push_btn(self, event):
