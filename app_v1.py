@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from PIL import ImageTk, Image
 from docxtpl import DocxTemplate
 import openpyxl
 
@@ -241,7 +242,17 @@ class App(tk.Tk):
         print(self.variable.get())
         if event:
             print(f'выбрано: {event.widget.get()}')
-            list_for_render_full_og.append(event.widget.get())
+            if event.widget.get() in list_of_og:
+                list_for_render_full_og.append(event.widget.get())
+                list_of_og.remove(event.widget.get())
+                print(f'Обычный список{list_of_og}')
+                print(f'Сгенерированный{list_for_render_full_og}')
+            else:
+                if event.widget.get() not in list_of_og:
+                    list_of_og.append(event.widget.get())
+                    list_for_render_full_og.remove(event.widget.get())
+                    print(f'Обычный список{list_of_og}')
+                    print(f'Сгенерированный{list_for_render_full_og}')
 
     def add_entry_shorted_og_pm(self, event):
         print(self.variable.get())
@@ -266,6 +277,12 @@ class App(tk.Tk):
         if event:
             print(f'выбрано: {event.widget.get()}')
             list_for_render_pat_ak.append(event.widget.get())
+
+    def _choose_element(self, event):
+        self.element = event.widget.get()
+        if self.element in self.list_og:
+            self.list_for_render_full_og.append(self.element)
+            self.list_og.remove(self.element)
 
     def render_template(self, event):
         # dict = {index: value for index, value in enumerate(lst}
