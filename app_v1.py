@@ -85,7 +85,7 @@ class App(tk.Tk):
         self.combobox_day.grid(pady=1)
         self.combobox_day.bind('<<ComboboxSelected>>', self.add_entry_date)
 
-        # OG
+        # OG SHORTED
         self.label_shorted_og = ttk.Label(text="Выберете ОГ сокращенного состава:").grid()
         self.combobox_sog = ttk.Combobox(values=list_of_sog, width=40)
         self.combobox_sog.grid(pady=1)
@@ -228,13 +228,11 @@ class App(tk.Tk):
     #     print(list_for_render)
 
     def add_entry_date(self, event):
-        print(self.variable.get())
         if event:
             print(f'выбрано: {event.widget.get()}')
             list_for_render_date_and_month.append(event.widget.get())
 
     def add_entry_shorted_og(self, event):
-        print(self.variable.get())
         if event:
             print(f'выбрано: {event.widget.get()}')
             list_for_render_shorted_og.append(event.widget.get())
@@ -248,35 +246,65 @@ class App(tk.Tk):
                 list_of_og.remove(element)
                 print(f"Element '{element}' add in list_for_render_full_og")
             else:
-                for element_rendr in list_for_render_full_og:
-                    if element_rendr == element:
+                for element_render in list_for_render_full_og:
+                    if element_render == element:
                         self._show_info()
 
-
     def add_entry_shorted_og_pm(self, event):
-        print(self.variable.get())
+        element = event.widget.get()
         if event:
-            print(f'выбрано: {event.widget.get()}')
-            list_for_render_shorted_og_pm.append(event.widget.get())
+            if element in list_PM:
+                print(f"Element '{element}' in list_PM")
+                list_for_render_shorted_og_pm.append(element)
+                print(f"Element '{element}' ADD in list_for_render_shorted_og")
+                list_PM.remove(element)
+                print(f"Element '{element}' REMOVE in list_PM")
+            else:
+                for element_render in list_for_render_shorted_og_pm:
+                    if element_render == element:
+                        self._show_info()
 
     def add_entry_full_og_pm(self, event):
-        print(self.variable.get())
+        element = event.widget.get()
         if event:
-            print(f'выбрано: {event.widget.get()}')
-            list_for_render_full_og_pm.append(event.widget.get())
+            if element in list_PM:
+                print(f"Element '{element}' in list_PM")
+                list_for_render_full_og_pm.append(element)
+                print(f"Element '{element}' ADD in list_for_render_full_og")
+                list_PM.remove(element)
+                print(f"Element '{element}' REMOVE in list_PM")
+            else:
+                for element_render in list_for_render_full_og_pm:
+                    if element_render == element:
+                        self._show_info()
 
     def add_entry_pat(self, event):
-        print(self.variable.get())
+        element = event.widget.get()
         if event:
-            print(f'выбрано: {event.widget.get()}')
-            list_for_render_pat.append(event.widget.get())
+            if element in list_of_pat:
+                print(f"Element '{element}' in list_of_pat")
+                list_for_render_pat.append(element)
+                print(f"Element '{element}' ADD in list_for_render_pat")
+                list_of_pat.remove(element)
+                print(f"Element '{element}' REMOVE in list_of_pat")
+            else:
+                for element_render in list_for_render_pat:
+                    if element_render == element:
+                        self._show_info()
 
     def add_entry_pat_ak(self, event):
-        print(self.variable.get())
+        element = event.widget.get()
         if event:
-            print(f'выбрано: {event.widget.get()}')
-            list_for_render_pat_ak.append(event.widget.get())
-
+            if element in list_AK:
+                print(f"Element '{element}' in list_AK")
+                list_for_render_pat_ak.append(element)
+                print(f"Element '{element}' ADD in list_for_render_pat_ak")
+                list_AK.remove(element)
+                print(f"Element '{element}' REMOVE in list_AK")
+            else:
+                for element_render in list_for_render_pat_ak:
+                    if element_render == element:
+                        self._show_info()
 
     def _show_info(self):
         msg = "Запись уже существует! Поменяйте свой выбор."
