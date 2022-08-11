@@ -28,30 +28,41 @@ def converting_exel_files_to_list_for_sog():
     """Перевод значений эксель в список (первый столбец)"""
     for row in sheet.rows:
         list_of_sog.append(str(row[0].value))
+    del list_of_sog[0]
+    del list_of_sog[-32:]
 
 
 def converting_exel_files_to_list_for_og():
     """Перевод значений эксель в список (второй столбец столбец)"""
     for row in sheet.rows:
         list_of_og.append(str(row[1].value))
+    del list_of_og[0]
+    del list_of_og[-20:]
 
 
 def converting_exel_files_to_list_for_PAT():
     """Конвертирует данные из 3 столбца таблицы exel в список"""
     for row in sheet.rows:
         list_of_pat.append(str(row[2].value))
+    del list_of_pat[0]
+    del list_of_pat[-15:]
 
 
 def converting_exel_files_to_list_PM_for_OG():
     """Конвертирует данные из 4 столбца таблицы exel в список"""
     for row in sheet.rows:
         list_PM.append(str(row[3].value))
+    del list_PM[0]
+    del list_PM[-2:]
 
 
 def converting_exel_files_to_list_AK_for_PAT():
     """Конвертирует данные из 5 столбца таблицы exel в список"""
     for row in sheet.rows:
         list_AK.append(str(row[4].value))
+    del list_AK[-8:]
+    del list_AK[0]
+
 
 
 converting_exel_files_to_list_PM_for_OG()
@@ -170,7 +181,7 @@ class App(tk.Tk):
             self.com.grid(row=item, column=2, pady=1)
             self.com.bind('<<ComboboxSelected>>', self.add_entry_pat)
 
-        # AK
+        # AK FOR PAT
         self.label_ak_PAT = ttk.Label(text="Выберете ak PAT :").grid(row=0, column=3)
         self.label_ak_control_group = ttk.Label(text="Control group").grid(row=1, column=3)
         for item in range(2, 4):
@@ -216,16 +227,13 @@ class App(tk.Tk):
 
         self.label_ak_med_group = ttk.Label(text="med group").grid(row=31, column=3)
         for item in range(32, 34):
-            self.com = ttk.Combobox(values=list_of_pat, width=40)
+            self.com = ttk.Combobox(values=list_AK, width=40)
             self.com.grid(row=item, column=3)
             self.com.bind('<<ComboboxSelected>>', self.add_entry_pat_ak)
 
         self.btn = tk.Button(text='Сгенерировать документ', width=36, heigh=6, bg='green')
         self.btn.place(relx=0.01, rely=0.8)
         self.btn.bind('<Button-1>', self.render_template)
-
-    # def push_btn(self, event):
-    #     print(list_for_render)
 
     def add_entry_date(self, event):
         if event:
