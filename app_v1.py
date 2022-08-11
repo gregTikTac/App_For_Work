@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from PIL import ImageTk, Image
+import tkinter.messagebox as mb
 from docxtpl import DocxTemplate
 import openpyxl
 
@@ -239,20 +240,18 @@ class App(tk.Tk):
             list_for_render_shorted_og.append(event.widget.get())
 
     def add_entry_full_og(self, event):
-        print(self.variable.get())
+        element = event.widget.get()
         if event:
-            print(f'выбрано: {event.widget.get()}')
-            if event.widget.get() in list_of_og:
-                list_for_render_full_og.append(event.widget.get())
-                list_of_og.remove(event.widget.get())
-                print(f'Обычный список{list_of_og}')
-                print(f'Сгенерированный{list_for_render_full_og}')
+            if element in list_of_og:
+                print(f"Element '{element}' in list_of_og")
+                list_for_render_full_og.append(element)
+                list_of_og.remove(element)
+                print(f"Element '{element}' add in list_for_render_full_og")
             else:
-                if event.widget.get() not in list_of_og:
-                    list_of_og.append(event.widget.get())
-                    list_for_render_full_og.remove(event.widget.get())
-                    print(f'Обычный список{list_of_og}')
-                    print(f'Сгенерированный{list_for_render_full_og}')
+                for element_rendr in list_for_render_full_og:
+                    if element_rendr == element:
+                        self._show_info()
+
 
     def add_entry_shorted_og_pm(self, event):
         print(self.variable.get())
@@ -278,11 +277,10 @@ class App(tk.Tk):
             print(f'выбрано: {event.widget.get()}')
             list_for_render_pat_ak.append(event.widget.get())
 
-    def _choose_element(self, event):
-        self.element = event.widget.get()
-        if self.element in self.list_og:
-            self.list_for_render_full_og.append(self.element)
-            self.list_og.remove(self.element)
+
+    def _show_info(self):
+        msg = "Запись уже существует! Поменяйте свой выбор."
+        mb.showinfo("Информация", msg)
 
     def render_template(self, event):
         # dict = {index: value for index, value in enumerate(lst}
