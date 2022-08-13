@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import ttk
-from PIL import ImageTk, Image
 import tkinter.messagebox as mb
 from docxtpl import DocxTemplate
 import openpyxl
@@ -83,8 +82,8 @@ class App(tk.Tk):
         self.variable = tk.StringVar()
 
         self.label_month = ttk.Label(text="Выберете месяц:").grid()
-        self.combobox_month = ttk.Combobox(values=['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля',
-                                                   'августа', 'сентября', 'октября', 'ноября', 'декабря'], width=40)
+        self.combobox_month = ttk.Combobox(values=['январь', 'февраль', 'март', 'апреля', 'май', 'июнь', 'июль',
+                                                   'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'], width=40)
         self.combobox_month.grid()
         self.combobox_month.bind('<<ComboboxSelected>>', self.add_entry_date)
 
@@ -236,9 +235,20 @@ class App(tk.Tk):
         self.btn.bind('<Button-1>', self.render_template)
 
     def add_entry_date(self, event):
+        element = event.widget.get()
         if event:
-            print(f'выбрано: {event.widget.get()}')
-            list_for_render_date_and_month.append(event.widget.get())
+            if element == 'август' or element == 'март':
+                element += 'a'
+                list_for_render_date_and_month.append(element)
+                print(list_for_render_date_and_month)
+            elif element == 'май':
+                element = 'мая'
+                list_for_render_date_and_month.append(element)
+                print(list_for_render_date_and_month)
+            else:
+                element = element.replace(element[-1], 'я')
+                list_for_render_date_and_month.append(element)
+                print(list_for_render_date_and_month)
 
     def add_entry_shorted_og(self, event):
         if event:
