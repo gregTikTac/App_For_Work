@@ -1,6 +1,8 @@
 import openpyxl
 
-class XmlLoader:
+
+class XlsLoader:
+    """Загружает xmls, вытягивает значения из колоннок"""
     data = {}
     headers = ['older_og', 'officer_og', 'pat', 'pm_for_group_og', 'ak_for_pat']
 
@@ -14,7 +16,6 @@ class XmlLoader:
         for head in self.headers:
             self.data[head] = self._get_column(index, sheet)
             index += 1
-
 
     def _get_column(self, index, sheet):
         lst = []
