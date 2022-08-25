@@ -93,11 +93,13 @@ class App(tk.Tk):
     dict_for_render[SHORTED_OG] = ['', '']
     dict_for_render[PM_FOR_OG] = ['', '']
     dict_for_render[PM_FULL_OG] = ['', '', '', '', '', '', '', '']
+    dict_for_render[GROUP_PAT] = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '']
+    dict_for_render[AK_FOR_PAT] = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
 
     def __init__(self):
         super().__init__()
         self.title('GUI for work')
-        self.geometry('900x800+250+0')
+        self.geometry('1000x800+250+0')
         self.iconbitmap('arm.ico')
         self.resizable(False, False)
 
@@ -155,107 +157,131 @@ class App(tk.Tk):
         for item in range(1, 8):
             self.com = ttk.Combobox(values=xls_loader.data[self.PM_FOR_OG], width=40, name=f'cbox_pm_fog_{item}')
             self.com.grid(pady=1)
-            self.com.bind('<<ComboboxSelected>>', self.add_entry_full_og_pm)
+            self.com.bind('<<ComboboxSelected>>', self.handle_pm_for_full_og_event)
 
         # PAT
-        self.label_PAT = ttk.Label(text="Выберете PAT состава:").grid(row=0, column=2)
-        self.label_control_group = ttk.Label(text="Control group").grid(row=1, column=2)
-        for item in range(2, 4):
-            self.com = ttk.Combobox(values=xls_loader.data[self.GROUP_PAT], width=40)
-            self.com.grid(row=item, column=2, padx=40, pady=1)
-            self.com.bind('<<ComboboxSelected>>', self.add_entry_pat)
+        self.label_PAT = ttk.Label(text="Выберете PAT состава:").place(x=425, y=1)
+        self.label_contol_group = ttk.Label(text="Control:").place(x=300, y=20)
+        self.label_ranger_group = ttk.Label(text="Rangers:").place(x=300, y=65)
+        self.label_block_group = ttk.Label(text="Block:").place(x=310, y=110)
+        self.label_fire_group = ttk.Label(text="Fire:").place(x=310, y=295)
+        self.label_reserve_group = ttk.Label(text="Reserve:").place(x=300, y=365)
+        self.label_sapper_group = ttk.Label(text="Sappers:").place(x=300, y=460)
+        self.label_rhb_group = ttk.Label(text="Rhb:").place(x=310, y=505)
+        self.label_med_group = ttk.Label(text="Med:").place(x=310, y=550)
 
-        self.label_ranger_group = ttk.Label(text="ranger group").grid(row=4, column=2)
-        for item in range(5, 7):
-            self.com = ttk.Combobox(values=xls_loader.data[self.GROUP_PAT], width=40)
-            self.com.grid(row=item, column=2)
-            self.com.bind('<<ComboboxSelected>>', self.add_entry_pat)
+        for item in range(1, 26):
+            self.com = ttk.Combobox(values=xls_loader.data[self.GROUP_PAT], name=f'cbox_pat_{item}', width=40)
+            self.com.grid(row=item, column=3, padx=70, pady=1)
+            self.com.bind('<<ComboboxSelected>>', self.handle_pat_event)
 
-        self.label_defense_group = ttk.Label(text="defense group").grid(row=7, column=2)
-        for item in range(8, 16):
-            self.com = ttk.Combobox(values=xls_loader.data[self.GROUP_PAT], width=40)
-            self.com.grid(row=item, column=2)
-            self.com.bind('<<ComboboxSelected>>', self.add_entry_pat)
+        # PAT AK
+        self.label_PAT = ttk.Label(text="Выберете PAT состава:").place(x=765, y=1)
+        self.label_contol_group = ttk.Label(text="Control:").place(x=640, y=20)
+        self.label_ranger_group = ttk.Label(text="Rangers:").place(x=640, y=65)
+        self.label_block_group = ttk.Label(text="Block:").place(x=650, y=110)
+        self.label_fire_group = ttk.Label(text="Fire:").place(x=650, y=295)
+        self.label_reserve_group = ttk.Label(text="Reserve:").place(x=640, y=365)
+        self.label_sapper_group = ttk.Label(text="Sappers:").place(x=640, y=460)
+        self.label_rhb_group = ttk.Label(text="Rhb:").place(x=650, y=505)
+        self.label_med_group = ttk.Label(text="Med:").place(x=650, y=550)
 
-        self.label_fire_group = ttk.Label(text="fire group").grid(row=16, column=2)
-        for item in range(17, 20):
-            self.com = ttk.Combobox(values=xls_loader.data[self.GROUP_PAT], width=40)
-            self.com.grid(row=item, column=2, pady=1)
-            self.com.bind('<<ComboboxSelected>>', self.add_entry_pat)
+        for item in range(1, 26):
+            self.com = ttk.Combobox(values=xls_loader.data[self.AK_FOR_PAT], name=f'cbox_ak_pat_{item}', width=40)
+            self.com.grid(row=item, column=4, padx=10, pady=1)
+            self.com.bind('<<ComboboxSelected>>', self.handle_ak_for_pat_event)
+        #
+        # # self.label_ranger_group = ttk.Label(text="ranger group").place(x=415, y=85)
+        # for item in range(4, 6):
+        #     self.com = ttk.Combobox(values=xls_loader.data[self.GROUP_PAT], name=f'cbox_pat_{item}', width=40)
+        #     self.com.grid(row=item+1, column=2)
+        #     self.com.bind('<<ComboboxSelected>>', self.handle_pat_event)
+        #
+        # # self.label_defense_group = ttk.Label(text="defense group").place(x=415, y=155)
+        # for item in range(7, 15):
+        #     self.com = ttk.Combobox(values=xls_loader.data[self.GROUP_PAT], name=f'cbox_pat_{item}', width=40)
+        #     self.com.grid(row=item+1, column=2)
+        #     self.com.bind('<<ComboboxSelected>>', self.handle_pat_event)
+        #
+        # # self.label_fire_group = ttk.Label(text="fire group").place(x=425, y=360)
+        # for item in range(16, 19):
+        #     self.com = ttk.Combobox(values=xls_loader.data[self.GROUP_PAT], name=f'cbox_pat_{item}', width=40)
+        #     self.com.grid(row=item+1, column=2, pady=1)
+        #     self.com.bind('<<ComboboxSelected>>', self.handle_pat_event)
+        #
+        # # self.label_reserve_group = ttk.Label(text="reserve group").place(x=415, y=450)
+        # for item in range(20, 24):
+        #     self.com = ttk.Combobox(values=xls_loader.data[self.GROUP_PAT], name=f'cbox_pat_{item}', width=40)
+        #     self.com.grid(row=item+1, column=2, pady=1)
+        #     self.com.bind('<<ComboboxSelected>>', self.handle_pat_event)
+        #
+        # self.label_sappers_group = ttk.Label(text="sappers group").place(x=415, y=565)
+        # for item in range(25, 27):
+        #     self.com = ttk.Combobox(values=xls_loader.data[self.GROUP_PAT], name=f'cbox_pat_{item}', width=40)
+        #     self.com.grid(row=item+1, column=2, pady=1)
+        #     self.com.bind('<<ComboboxSelected>>', self.handle_pat_event)
+        #
+        # self.label_rhb_group = ttk.Label(text="rhb group").place(x=425, y=635)
+        # for item in range(28, 30):
+        #     self.com = ttk.Combobox(values=xls_loader.data[self.GROUP_PAT], name=f'cbox_pat_{item}', width=40)
+        #     self.com.grid(row=item+1, column=2, pady=1)
+        #     self.com.bind('<<ComboboxSelected>>', self.handle_pat_event)
+        #
+        # self.label_med_group = ttk.Label(text="med group").place(x=425, y=697)
+        # for item in range(31, 33):
+        #     self.com = ttk.Combobox(values=xls_loader.data[self.GROUP_PAT], name=f'cbox_pat_{item}', width=40)
+        #     self.com.grid(row=item+1, column=2, pady=1)
+        #     self.com.bind('<<ComboboxSelected>>', self.handle_pat_event)
 
-        self.label_reserve_group = ttk.Label(text="reserve group").grid(row=20, column=2)
-        for item in range(21, 25):
-            self.com = ttk.Combobox(values=xls_loader.data[self.GROUP_PAT], width=40)
-            self.com.grid(row=item, column=2, pady=1)
-            self.com.bind('<<ComboboxSelected>>', self.add_entry_pat)
-
-        self.label_sappers_group = ttk.Label(text="sappers group").grid(row=25, column=2)
-        for item in range(26, 28):
-            self.com = ttk.Combobox(values=xls_loader.data[self.GROUP_PAT], width=40)
-            self.com.grid(row=item, column=2, pady=1)
-            self.com.bind('<<ComboboxSelected>>', self.add_entry_pat)
-
-        self.label_rhb_group = ttk.Label(text="rhb group").grid(row=28, column=2)
-        for item in range(29, 31):
-            self.com = ttk.Combobox(values=xls_loader.data[self.GROUP_PAT], width=40)
-            self.com.grid(row=item, column=2, pady=1)
-            self.com.bind('<<ComboboxSelected>>', self.add_entry_pat)
-
-        self.label_med_group = ttk.Label(text="med group").grid(row=31, column=2)
-        for item in range(32, 34):
-            self.com = ttk.Combobox(values=xls_loader.data[self.GROUP_PAT], width=40)
-            self.com.grid(row=item, column=2, pady=1)
-            self.com.bind('<<ComboboxSelected>>', self.add_entry_pat)
-
-        # AK FOR PAT
-        self.label_ak_PAT = ttk.Label(text="Выберете ak PAT :").grid(row=0, column=3)
-        self.label_ak_control_group = ttk.Label(text="Control group").grid(row=1, column=3)
-        for item in range(2, 4):
-            self.com = ttk.Combobox(values=xls_loader.data[self.AK_FOR_PAT], width=40)
-            self.com.grid(row=item, column=3)
-            self.com.bind('<<ComboboxSelected>>', self.add_entry_pat_ak)
-
-        self.label_ak_ranger_group = ttk.Label(text="ranger group").grid(row=4, column=3)
-        for item in range(5, 7):
-            self.com = ttk.Combobox(values=xls_loader.data[self.AK_FOR_PAT], width=40)
-            self.com.grid(row=item, column=3)
-            self.com.bind('<<ComboboxSelected>>', self.add_entry_pat_ak)
-
-        self.label_ak_defense_group = ttk.Label(text="defense group").grid(row=7, column=3)
-        for item in range(8, 16):
-            self.com = ttk.Combobox(values=xls_loader.data[self.AK_FOR_PAT], width=40)
-            self.com.grid(row=item, column=3)
-            self.com.bind('<<ComboboxSelected>>', self.add_entry_pat_ak)
-
-        self.label_ak_fire_group = ttk.Label(text="fire group").grid(row=16, column=3)
-        for item in range(17, 20):
-            self.com = ttk.Combobox(values=xls_loader.data[self.AK_FOR_PAT], width=40)
-            self.com.grid(row=item, column=3)
-            self.com.bind('<<ComboboxSelected>>', self.add_entry_pat_ak)
-
-        self.label_ak_reserve_group = ttk.Label(text="reserve group").grid(row=20, column=3)
-        for item in range(21, 25):
-            self.com = ttk.Combobox(values=xls_loader.data[self.AK_FOR_PAT], width=40)
-            self.com.grid(row=item, column=3)
-            self.com.bind('<<ComboboxSelected>>', self.add_entry_pat_ak)
-
-        self.label_ak_sappers_group = ttk.Label(text="sappers group").grid(row=25, column=3)
-        for item in range(26, 28):
-            self.com = ttk.Combobox(values=xls_loader.data[self.AK_FOR_PAT], width=40)
-            self.com.grid(row=item, column=3)
-            self.com.bind('<<ComboboxSelected>>', self.add_entry_pat_ak)
-
-        self.label_ak_rhb_group = ttk.Label(text="rhb group").grid(row=28, column=3)
-        for item in range(29, 31):
-            self.com = ttk.Combobox(values=xls_loader.data[self.AK_FOR_PAT], width=40)
-            self.com.grid(row=item, column=3)
-            self.com.bind('<<ComboboxSelected>>', self.add_entry_pat_ak)
-
-        self.label_ak_med_group = ttk.Label(text="med group").grid(row=31, column=3)
-        for item in range(32, 34):
-            self.com = ttk.Combobox(values=xls_loader.data[self.AK_FOR_PAT], width=40)
-            self.com.grid(row=item, column=3)
-            self.com.bind('<<ComboboxSelected>>', self.add_entry_pat_ak)
+        # # AK FOR PAT
+        # self.label_ak_PAT = ttk.Label(text="Выберете ak PAT :").grid(row=0, column=3)
+        # self.label_ak_control_group = ttk.Label(text="Control group").grid(row=1, column=3)
+        # for item in range(2, 4):
+        #     self.com = ttk.Combobox(values=xls_loader.data[self.AK_FOR_PAT], name=f'cbox_ak_pat_{item}', width=40)
+        #     self.com.grid(row=item, column=3)
+        #     self.com.bind('<<ComboboxSelected>>', self.handle_ak_for_pat_event)
+        #
+        # self.label_ak_ranger_group = ttk.Label(text="ranger group").grid(row=4, column=3)
+        # for item in range(5, 7):
+        #     self.com = ttk.Combobox(values=xls_loader.data[self.AK_FOR_PAT], name=f'cbox_ak_pat_{item}', width=40)
+        #     self.com.grid(row=item, column=3)
+        #     self.com.bind('<<ComboboxSelected>>', self.handle_ak_for_pat_event)
+        #
+        # self.label_ak_defense_group = ttk.Label(text="defense group").grid(row=7, column=3)
+        # for item in range(8, 16):
+        #     self.com = ttk.Combobox(values=xls_loader.data[self.AK_FOR_PAT], name=f'cbox_ak_pat_{item}', width=40)
+        #     self.com.grid(row=item, column=3)
+        #     self.com.bind('<<ComboboxSelected>>', self.handle_ak_for_pat_event)
+        #
+        # self.label_ak_fire_group = ttk.Label(text="fire group").grid(row=16, column=3)
+        # for item in range(17, 20):
+        #     self.com = ttk.Combobox(values=xls_loader.data[self.AK_FOR_PAT], name=f'cbox_ak_pat_{item}', width=40)
+        #     self.com.grid(row=item, column=3)
+        #     self.com.bind('<<ComboboxSelected>>', self.handle_ak_for_pat_event)
+        #
+        # self.label_ak_reserve_group = ttk.Label(text="reserve group").grid(row=20, column=3)
+        # for item in range(21, 25):
+        #     self.com = ttk.Combobox(values=xls_loader.data[self.AK_FOR_PAT], name=f'cbox_ak_pat_{item}', width=40)
+        #     self.com.grid(row=item, column=3)
+        #     self.com.bind('<<ComboboxSelected>>', self.handle_ak_for_pat_event)
+        #
+        # self.label_ak_sappers_group = ttk.Label(text="sappers group").grid(row=25, column=3)
+        # for item in range(26, 28):
+        #     self.com = ttk.Combobox(values=xls_loader.data[self.AK_FOR_PAT], name=f'cbox_ak_pat_{item}', width=40)
+        #     self.com.grid(row=item, column=3)
+        #     self.com.bind('<<ComboboxSelected>>', self.handle_ak_for_pat_event)
+        #
+        # self.label_ak_rhb_group = ttk.Label(text="rhb group").grid(row=28, column=3)
+        # for item in range(29, 31):
+        #     self.com = ttk.Combobox(values=xls_loader.data[self.AK_FOR_PAT], name=f'cbox_ak_pat_{item}', width=40)
+        #     self.com.grid(row=item, column=3)
+        #     self.com.bind('<<ComboboxSelected>>', self.handle_ak_for_pat_event)
+        #
+        # self.label_ak_med_group = ttk.Label(text="med group").grid(row=31, column=3)
+        # for item in range(32, 34):
+        #     self.com = ttk.Combobox(values=xls_loader.data[self.AK_FOR_PAT], name=f'cbox_ak_pat_{item}', width=40)
+        #     self.com.grid(row=item, column=3)
+        #     self.com.bind('<<ComboboxSelected>>', self.handle_ak_for_pat_event)
 
         self.btn = tk.Button(text='Сгенерировать документ', width=36, heigh=6, bg='green')
         self.btn.place(relx=0.01, rely=0.8)
@@ -276,6 +302,7 @@ class App(tk.Tk):
                 element = element.replace(element[-1], 'я')
                 list_for_render_date_and_month.append(element)
                 print(list_for_render_date_and_month)
+            # TODO переделать
 
     def handle_shorted_og_event(self, event):
         element = event.widget.get()
@@ -313,14 +340,13 @@ class App(tk.Tk):
         element = event.widget.get()
         if event:
             if str(event.widget).split(".")[-1].startswith('cbox_pm_for_shorted_og'):
-                list_for_render_shorted_og_pm.append(element)
                 index_name = int(str(event.widget).split("_")[-1])
                 print(index_name)
                 self.dict_for_render[self.PM_FOR_OG][index_name - 1] = element
                 print(self.dict_for_render[self.PM_FOR_OG])
         # TODO доработать проверку на наличие повторяемых (выбранных) значений
 
-    def add_entry_full_og_pm(self, event):
+    def handle_pm_for_full_og_event(self, event):
         element = event.widget.get()
         if event:
             if str(event.widget).split(".")[-1].startswith('cbox_pm_fog'):
@@ -328,6 +354,36 @@ class App(tk.Tk):
                 print(index_name)
                 self.dict_for_render[self.PM_FULL_OG][index_name - 1] = element
                 print(self.dict_for_render[self.PM_FULL_OG])
+        # TODO доработать проверку на наличие повторяемых (выбранных) значений
+
+    def handle_pat_event(self, event):
+        element = event.widget.get()
+        if event:
+            if str(event.widget).split(".")[-1].startswith('cbox_pat'):
+                # list_for_render_shorted_og_pm.append(element)
+                index_name = int(str(event.widget).split("_")[-1])
+                print(index_name)
+                self.dict_for_render[self.GROUP_PAT][index_name-1] = element
+                print(self.dict_for_render[self.GROUP_PAT])
+
+    def handle_ak_for_pat_event(self, event):
+        element = event.widget.get()
+        if event:
+            if str(event.widget).split(".")[-1].startswith('cbox_pat'):
+                # list_for_render_shorted_og_pm.append(element)
+                index_name = int(str(event.widget).split("_")[-1])
+                print(index_name)
+                self.dict_for_render[self.AK_FOR_PAT][index_name] = element
+                print(self.dict_for_render[self.AK_FOR_PAT])
+
+    # def add_entry_full_og_pm(self, event):
+    #     element = event.widget.get()
+    #     if event:
+    #         if str(event.widget).split(".")[-1].startswith('cbox_pm_fog'):
+    #             index_name = int(str(event.widget).split("_")[-1])
+    #             print(index_name)
+    #             self.dict_for_render[self.PM_FULL_OG][index_name - 1] = element
+    #             print(self.dict_for_render[self.PM_FULL_OG])
 
 
             # if element in list_PM:
@@ -341,33 +397,33 @@ class App(tk.Tk):
             #         if element_render == element:
             #             self._show_info()
 
-    def add_entry_pat(self, event):
-        element = event.widget.get()
-        if event:
-            if element in list_of_pat:
-                print(f"Element '{element}' in list_of_pat")
-                list_for_render_pat.append(element)
-                print(f"Element '{element}' ADD in list_for_render_pat")
-                list_of_pat.remove(element)
-                print(f"Element '{element}' REMOVE in list_of_pat")
-            else:
-                for element_render in list_for_render_pat:
-                    if element_render == element:
-                        self._show_info()
+    # def add_entry_pat(self, event):
+    #     element = event.widget.get()
+    #     if event:
+    #         if element in list_of_pat:
+    #             print(f"Element '{element}' in list_of_pat")
+    #             list_for_render_pat.append(element)
+    #             print(f"Element '{element}' ADD in list_for_render_pat")
+    #             list_of_pat.remove(element)
+    #             print(f"Element '{element}' REMOVE in list_of_pat")
+    #         else:
+    #             for element_render in list_for_render_pat:
+    #                 if element_render == element:
+    #                     self._show_info()
 
-    def add_entry_pat_ak(self, event):
-        element = event.widget.get()
-        if event:
-            if element in list_AK:
-                print(f"Element '{element}' in list_AK")
-                list_for_render_pat_ak.append(element)
-                print(f"Element '{element}' ADD in list_for_render_pat_ak")
-                list_AK.remove(element)
-                print(f"Element '{element}' REMOVE in list_AK")
-            else:
-                for element_render in list_for_render_pat_ak:
-                    if element_render == element:
-                        self._show_info()
+    # def add_entry_pat_ak(self, event):
+    #     element = event.widget.get()
+    #     if event:
+    #         if element in list_AK:
+    #             print(f"Element '{element}' in list_AK")
+    #             list_for_render_pat_ak.append(element)
+    #             print(f"Element '{element}' ADD in list_for_render_pat_ak")
+    #             list_AK.remove(element)
+    #             print(f"Element '{element}' REMOVE in list_AK")
+    #         else:
+    #             for element_render in list_for_render_pat_ak:
+    #                 if element_render == element:
+    #                     self._show_info()
 
     def _show_info(self):
         msg = "Запись уже существует! Поменяйте свой выбор."
