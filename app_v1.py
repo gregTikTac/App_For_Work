@@ -15,18 +15,20 @@ xls_loader = XlsLoader('word_automation.xlsm')
 xls_loader.load()
 
 sheet = file_for_work.active
-list_of_sog = []
-list_of_og = []
-list_of_pat = []
-list_PM = []
-list_AK = []
+# list_of_sog = []
+# list_of_og = []
+# list_of_pat = []
+# list_PM = []
+# list_AK = []
 list_for_render_date_and_month = []
-list_for_render_shorted_og = []
-list_for_render_full_og = []
-list_for_render_shorted_og_pm = []
-list_for_render_full_og_pm = []
-list_for_render_pat = []
-list_for_render_pat_ak = []
+
+
+# list_for_render_shorted_og = []
+# list_for_render_full_og = []
+# list_for_render_shorted_og_pm = []
+# list_for_render_full_og_pm = []
+# list_for_render_pat = []
+# list_for_render_pat_ak = []
 
 
 # def converting_exel_files_to_list_for_sog():
@@ -87,14 +89,14 @@ class App(tk.Tk):
     SHORTED_OG = 'shorted_og'
     PM_FULL_OG = 'pm_full_og'
 
-
-    dict_for_render = {}
-    dict_for_render[OFFICERS_OG] = ['', '', '', '', '', '']
-    dict_for_render[SHORTED_OG] = ['', '']
-    dict_for_render[PM_FOR_OG] = ['', '']
-    dict_for_render[PM_FULL_OG] = ['', '', '', '', '', '', '', '']
-    dict_for_render[GROUP_PAT] = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '']
-    dict_for_render[AK_FOR_PAT] = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
+    dict_for_render = {
+        OFFICERS_OG: ['', '', '', '', '', ''],
+        SHORTED_OG: ['', ''],
+        PM_FOR_OG: ['', ''],
+        PM_FULL_OG: ['', '', '', '', '', '', '', ''],
+        GROUP_PAT: ['' for i in range(1, 26)],
+        AK_FOR_PAT: ['' for i in range(1, 26)]
+    }
 
     def __init__(self):
         super().__init__()
@@ -110,15 +112,15 @@ class App(tk.Tk):
         self.combobox_month = ttk.Combobox(values=['январь', 'февраль', 'март', 'апреля', 'май', 'июнь', 'июль',
                                                    'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'], width=40)
         self.combobox_month.grid()
-        self.combobox_month.bind('<<ComboboxSelected>>', self.add_entry_date)
+        self.combobox_month.bind('<<ComboboxSelected>>', self.add_entry_month)
 
         self.label_days = ttk.Label(text="Выберете дату:").grid()
         self.combobox_days = ttk.Combobox(values=[i for i in range(1, 32)], width=40)
         self.combobox_days.grid(padx=10, pady=1)
-        self.combobox_days.bind('<<ComboboxSelected>>', self.add_entry_date)
+        self.combobox_days.bind('<<ComboboxSelected>>', self.add_date)
         self.combobox_day = ttk.Combobox(values=[i for i in range(1, 32)], width=40)
         self.combobox_day.grid(pady=1)
-        self.combobox_day.bind('<<ComboboxSelected>>', self.add_entry_date)
+        self.combobox_day.bind('<<ComboboxSelected>>', self.add_date)
 
         # OG SHORTED
         self.label_shorted_og = ttk.Label(text="Выберете ОГ сокращенного состава:").grid()
@@ -137,9 +139,10 @@ class App(tk.Tk):
         self.combobox_full_sog.grid(pady=1)
         self.combobox_full_sog.bind('<<ComboboxSelected>>', self.handle_og_event)
         for item in range(1, 7):
-            self.com = ttk.Combobox(values=xls_loader.data[self.OFFICERS_OG], width=40, name=f'cbox_fog_{item}')
-            self.com.grid(pady=1)
-            self.com.bind('<<ComboboxSelected>>', self.handle_og_event)
+            self.com_fog = ttk.Combobox(values=xls_loader.data[self.OFFICERS_OG], width=40, name=f'cbox_fog_{item}')
+            self.com_fog.grid(pady=1)
+            self.com_fog.bind('<<ComboboxSelected>>', self.handle_og_event)
+
 
         # PM
         self.label_shorted_PM = ttk.Label(text="Выберете PM для ОГ сокращенного состава:").grid()
@@ -287,7 +290,12 @@ class App(tk.Tk):
         self.btn.place(relx=0.01, rely=0.8)
         self.btn.bind('<Button-1>', self.render_template)
 
-    def add_entry_date(self, event):
+    def add_date(self, event):
+        element = event.widget.get()
+        list_for_render_date_and_month.append(element)
+        print(list_for_render_date_and_month)
+
+    def add_entry_month(self, event):
         element = event.widget.get()
         if event:
             if element == 'август' or element == 'март':
@@ -302,13 +310,13 @@ class App(tk.Tk):
                 element = element.replace(element[-1], 'я')
                 list_for_render_date_and_month.append(element)
                 print(list_for_render_date_and_month)
-            # TODO переделать
 
     def handle_shorted_og_event(self, event):
         element = event.widget.get()
+        new_lst = []
         if event:
-            print(f'выбрано: {event.widget.get()}')
-            list_for_render_shorted_og.append(event.widget.get())
+            # print(f'выбрано: {event.widget.get()}')
+            # list_for_render_shorted_og.append(event.widget.get())
             index_name = int(str(event.widget).split("_")[-1])
             self.dict_for_render[self.SHORTED_OG][index_name - 1] = element
 
@@ -329,12 +337,22 @@ class App(tk.Tk):
         element = event.widget.get()
         if str(event.widget).split(".")[-1] == 'cbox_sog_full_og':
             self.dict_for_render[self.OLDER_OFFICERS_OG] = [element]
+            print(self.dict_for_render[self.OLDER_OFFICERS_OG])
         elif str(event.widget).split(".")[-1].startswith('cbox_fog'):
             index_name = int(str(event.widget).split("_")[-1])
-            print(index_name)
-            self.dict_for_render[self.OFFICERS_OG][index_name - 1] = element
-            print(self.dict_for_render[self.OFFICERS_OG])
-        # TODO доработать проверку на наличие повторяемых (выбранных) значений
+            if element not in self.dict_for_render[self.OFFICERS_OG]:
+            # for option in xls_loader.data[self.OFFICERS_OG]:
+            #     if option != element:
+            #         self.new_data.append(option)
+            # xls_loader.data[self.OFFICERS_OG] = self.new_data
+            # print(xls_loader.data[self.OFFICERS_OG])
+                self.dict_for_render[self.OFFICERS_OG][index_name - 1] = element
+                print(self.dict_for_render[self.OFFICERS_OG])
+            else:
+                self._show_info()
+
+
+        # TODO доработать проверку на наличие повторяемых (выбранных) значений(обновление values)
 
     def handle_pm_for_shorted_og_event(self, event):
         element = event.widget.get()
@@ -351,30 +369,36 @@ class App(tk.Tk):
         if event:
             if str(event.widget).split(".")[-1].startswith('cbox_pm_fog'):
                 index_name = int(str(event.widget).split("_")[-1])
-                print(index_name)
-                self.dict_for_render[self.PM_FULL_OG][index_name - 1] = element
-                print(self.dict_for_render[self.PM_FULL_OG])
+                if element not in self.dict_for_render[self.PM_FULL_OG]:
+                    self.dict_for_render[self.PM_FULL_OG][index_name - 1] = element
+                    print(self.dict_for_render[self.PM_FULL_OG])
+                else:
+                    self._show_info()
+
         # TODO доработать проверку на наличие повторяемых (выбранных) значений
 
     def handle_pat_event(self, event):
         element = event.widget.get()
         if event:
             if str(event.widget).split(".")[-1].startswith('cbox_pat'):
-                # list_for_render_shorted_og_pm.append(element)
                 index_name = int(str(event.widget).split("_")[-1])
-                print(index_name)
-                self.dict_for_render[self.GROUP_PAT][index_name-1] = element
-                print(self.dict_for_render[self.GROUP_PAT])
+                if element not in self.dict_for_render[self.GROUP_PAT]:
+                    self.dict_for_render[self.GROUP_PAT][index_name - 1] = element
+                    print(self.dict_for_render[self.GROUP_PAT])
+                else:
+                    self._show_info()
 
     def handle_ak_for_pat_event(self, event):
         element = event.widget.get()
         if event:
-            if str(event.widget).split(".")[-1].startswith('cbox_pat'):
-                # list_for_render_shorted_og_pm.append(element)
+            if str(event.widget).split(".")[-1].startswith('cbox_ak_pat'):
                 index_name = int(str(event.widget).split("_")[-1])
                 print(index_name)
-                self.dict_for_render[self.AK_FOR_PAT][index_name] = element
-                print(self.dict_for_render[self.AK_FOR_PAT])
+                if element not in self.dict_for_render[self.AK_FOR_PAT]:
+                    self.dict_for_render[self.AK_FOR_PAT][index_name - 1] = element
+                    print(self.dict_for_render[self.AK_FOR_PAT])
+                else:
+                    self._show_info()
 
     # def add_entry_full_og_pm(self, event):
     #     element = event.widget.get()
@@ -385,17 +409,16 @@ class App(tk.Tk):
     #             self.dict_for_render[self.PM_FULL_OG][index_name - 1] = element
     #             print(self.dict_for_render[self.PM_FULL_OG])
 
-
-            # if element in list_PM:
-            #     print(f"Element '{element}' in list_PM")
-            #     list_for_render_full_og_pm.append(element)
-            #     print(f"Element '{element}' ADD in list_for_render_full_og")
-            #     list_PM.remove(element)
-            #     print(f"Element '{element}' REMOVE in list_PM")
-            # else:
-            #     for element_render in list_for_render_full_og_pm:
-            #         if element_render == element:
-            #             self._show_info()
+    # if element in list_PM:
+    #     print(f"Element '{element}' in list_PM")
+    #     list_for_render_full_og_pm.append(element)
+    #     print(f"Element '{element}' ADD in list_for_render_full_og")
+    #     list_PM.remove(element)
+    #     print(f"Element '{element}' REMOVE in list_PM")
+    # else:
+    #     for element_render in list_for_render_full_og_pm:
+    #         if element_render == element:
+    #             self._show_info()
 
     # def add_entry_pat(self, event):
     #     element = event.widget.get()
@@ -430,83 +453,83 @@ class App(tk.Tk):
         mb.showinfo("Информация", msg)
 
     def render_template(self, event):
-        # dict = {index: value for index, value in enumerate(lst}
-        context_list = {
+        self.dict_for_render = {
             'month': list_for_render_date_and_month[0],
             'number1': list_for_render_date_and_month[1],
-            'number2': list_for_render_date_and_month[1],
-            'og0': list_for_render_shorted_og[0],
-            'og1': list_for_render_shorted_og[1],
-            'og2': list_for_render_full_og[0],
-            'og3': list_for_render_full_og[1],
-            'og4': list_for_render_full_og[2],
-            'og5': list_for_render_full_og[3],
-            'og6': list_for_render_full_og[4],
-            'og7': list_for_render_full_og[5],
-            'og8': list_for_render_full_og[6],
-            # 'pat0': list_for_render_pat[0],
-            # 'pat1': list_for_render_pat[1],
-            # 'pat2': list_for_render_pat[2],
-            # 'pat3': list_for_render_pat[3],
-            # 'pat4': list_for_render_pat[4],
-            # 'pat5': list_for_render_pat[5],
-            # 'pat6': list_for_render_pat[6],
-            # 'pat7': list_for_render_pat[7],
-            # 'pat8': list_for_render_pat[8],
-            # 'pat9': list_for_render_pat[9],
-            # 'pat10': list_for_render_pat[10],
-            # 'pat11': list_for_render_pat[11],
-            # 'pat12': list_for_render_pat[12],
-            # 'pat13': list_for_render_pat[13],
-            # 'pat14': list_for_render_pat[14],
-            # 'pat15': list_for_render_pat[15],
-            # 'pat16': list_for_render_pat[16],
-            # 'pat17': list_for_render_pat[17],
-            # 'pat18': list_for_render_pat[18],
-            # 'pat19': list_for_render_pat[19],
-            # 'pat20': list_for_render_pat[20],
-            # 'pat21': list_for_render_pat[21],
-            # 'pat22': list_for_render_pat[22],
-            # 'pat23': list_for_render_pat[23],
-            # 'pat24': list_for_render_pat[24],
-            # 'pm0': list_for_render_shorted_og_pm[0],
-            # 'pm1': list_for_render_shorted_og_pm[1],
-            # 'pm2': list_for_render_full_og_pm[0],
-            # 'pm3': list_for_render_full_og_pm[1],
-            # 'pm4': list_for_render_full_og_pm[2],
-            # 'pm5': list_for_render_full_og_pm[3],
-            # 'pm6': list_for_render_full_og_pm[4],
-            # 'pm7': list_for_render_full_og_pm[5],
-            # 'pm8': list_for_render_full_og_pm[6],
-            # 'ak0': list_for_render_pat_ak[0],
-            # 'ak1': list_for_render_pat_ak[1],
-            # 'ak2': list_for_render_pat_ak[2],
-            # 'ak3': list_for_render_pat_ak[3],
-            # 'ak4': list_for_render_pat_ak[4],
-            # 'ak5': list_for_render_pat_ak[5],
-            # 'ak6': list_for_render_pat_ak[6],
-            # 'ak7': list_for_render_pat_ak[7],
-            # 'ak8': list_for_render_pat_ak[8],
-            # 'ak9': list_for_render_pat_ak[9],
-            # 'ak10': list_for_render_pat_ak[10],
-            # 'ak11': list_for_render_pat_ak[11],
-            # 'ak12': list_for_render_pat_ak[12],
-            # 'ak13': list_for_render_pat_ak[13],
-            # 'ak14': list_for_render_pat_ak[14],
-            # 'ak15': list_for_render_pat_ak[15],
-            # 'ak16': list_for_render_pat_ak[16],
-            # 'ak17': list_for_render_pat_ak[17],
-            # 'ak18': list_for_render_pat_ak[18],
-            # 'ak19': list_for_render_pat_ak[19],
-            # 'ak20': list_for_render_pat_ak[20],
-            # 'ak21': list_for_render_pat_ak[21],
-            # 'ak22': list_for_render_pat_ak[22],
-            # 'ak23': list_for_render_pat_ak[23],
-            # 'ak24': list_for_render_pat_ak[24],
+            'number2': list_for_render_date_and_month[2],
+            'shorted_og': self.dict_for_render[self.SHORTED_OG][0],
+            'shorted_og2': self.dict_for_render[self.SHORTED_OG][1],
+            'full_sog': self.dict_for_render[self.OLDER_OFFICERS_OG][0],
+            'full_og1': self.dict_for_render[self.OFFICERS_OG][0],
+            'full_og2': self.dict_for_render[self.OFFICERS_OG][1],
+            'full_og3': self.dict_for_render[self.OFFICERS_OG][2],
+            'full_og4': self.dict_for_render[self.OFFICERS_OG][3],
+            'full_og5': self.dict_for_render[self.OFFICERS_OG][4],
+            'full_og6': self.dict_for_render[self.OFFICERS_OG][5],
+            'pat0': self.dict_for_render[self.GROUP_PAT][0],
+            'pat1': self.dict_for_render[self.GROUP_PAT][1],
+            'pat2': self.dict_for_render[self.GROUP_PAT][2],
+            'pat3': self.dict_for_render[self.GROUP_PAT][3],
+            'pat4': self.dict_for_render[self.GROUP_PAT][4],
+            'pat5': self.dict_for_render[self.GROUP_PAT][5],
+            'pat6': self.dict_for_render[self.GROUP_PAT][6],
+            'pat7': self.dict_for_render[self.GROUP_PAT][7],
+            'pat8': self.dict_for_render[self.GROUP_PAT][8],
+            'pat9': self.dict_for_render[self.GROUP_PAT][9],
+            'pat10': self.dict_for_render[self.GROUP_PAT][10],
+            'pat11': self.dict_for_render[self.GROUP_PAT][11],
+            'pat12': self.dict_for_render[self.GROUP_PAT][12],
+            'pat13': self.dict_for_render[self.GROUP_PAT][13],
+            'pat14': self.dict_for_render[self.GROUP_PAT][14],
+            'pat15': self.dict_for_render[self.GROUP_PAT][15],
+            'pat16': self.dict_for_render[self.GROUP_PAT][16],
+            'pat17': self.dict_for_render[self.GROUP_PAT][17],
+            'pat18': self.dict_for_render[self.GROUP_PAT][18],
+            'pat19': self.dict_for_render[self.GROUP_PAT][19],
+            'pat20': self.dict_for_render[self.GROUP_PAT][20],
+            'pat21': self.dict_for_render[self.GROUP_PAT][21],
+            'pat22': self.dict_for_render[self.GROUP_PAT][22],
+            'pat23': self.dict_for_render[self.GROUP_PAT][23],
+            'pat24': self.dict_for_render[self.GROUP_PAT][24],
+            'pm0': self.dict_for_render[self.PM_FOR_OG][0],
+            'pm1': self.dict_for_render[self.PM_FOR_OG][1],
+            'pm2': self.dict_for_render[self.PM_FULL_OG][0],
+            'pm3': self.dict_for_render[self.PM_FULL_OG][1],
+            'pm4': self.dict_for_render[self.PM_FULL_OG][2],
+            'pm5': self.dict_for_render[self.PM_FULL_OG][3],
+            'pm6': self.dict_for_render[self.PM_FULL_OG][4],
+            'pm7': self.dict_for_render[self.PM_FULL_OG][5],
+            'pm8': self.dict_for_render[self.PM_FULL_OG][6],
+            'ak0': self.dict_for_render[self.AK_FOR_PAT][0],
+            'ak1': self.dict_for_render[self.AK_FOR_PAT][1],
+            'ak2': self.dict_for_render[self.AK_FOR_PAT][2],
+            'ak3': self.dict_for_render[self.AK_FOR_PAT][3],
+            'ak4': self.dict_for_render[self.AK_FOR_PAT][4],
+            'ak5': self.dict_for_render[self.AK_FOR_PAT][5],
+            'ak6': self.dict_for_render[self.AK_FOR_PAT][6],
+            'ak7': self.dict_for_render[self.AK_FOR_PAT][7],
+            'ak8': self.dict_for_render[self.AK_FOR_PAT][8],
+            'ak9': self.dict_for_render[self.AK_FOR_PAT][9],
+            'ak10': self.dict_for_render[self.AK_FOR_PAT][10],
+            'ak11': self.dict_for_render[self.AK_FOR_PAT][11],
+            'ak12': self.dict_for_render[self.AK_FOR_PAT][12],
+            'ak13': self.dict_for_render[self.AK_FOR_PAT][13],
+            'ak14': self.dict_for_render[self.AK_FOR_PAT][14],
+            'ak15': self.dict_for_render[self.AK_FOR_PAT][15],
+            'ak16': self.dict_for_render[self.AK_FOR_PAT][16],
+            'ak17': self.dict_for_render[self.AK_FOR_PAT][17],
+            'ak18': self.dict_for_render[self.AK_FOR_PAT][18],
+            'ak19': self.dict_for_render[self.AK_FOR_PAT][19],
+            'ak20': self.dict_for_render[self.AK_FOR_PAT][20],
+            'ak21': self.dict_for_render[self.AK_FOR_PAT][21],
+            'ak22': self.dict_for_render[self.AK_FOR_PAT][22],
+            'ak23': self.dict_for_render[self.AK_FOR_PAT][23],
+            'ak24': self.dict_for_render[self.AK_FOR_PAT][24],
         }
-        print('exelent!')
-        doc.render(context_list)
+        # print('exelent!')
+        doc.render(self.dict_for_render)
         doc.save('probe3.docx')
+        print(self.dict_for_render)
 
 
 app = App()
